@@ -55,3 +55,21 @@
     font-size: 13px;
   }
 }
+.contact-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: stretch;
+}
+
+.contact-actions .button {
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+@media (min-width: 641px) {
+  .contact-actions {
+    min-width: 220px;
+  }
+}
