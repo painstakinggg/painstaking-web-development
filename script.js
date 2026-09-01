@@ -15,21 +15,31 @@ document.addEventListener("DOMContentLoaded", () => {
     if (menuToggle && navLinks) {
 
         menuToggle.addEventListener("click", () => {
+
             navLinks.classList.toggle("active");
 
-            const isOpen = navLinks.classList.contains("active");
+            const isOpen =
+                navLinks.classList.contains("active");
 
-            menuToggle.setAttribute("aria-expanded", isOpen);
+            menuToggle.setAttribute(
+                "aria-expanded",
+                isOpen
+            );
+
         });
 
-
-        // Close menu when a navigation link is clicked
 
         navLinks.querySelectorAll("a").forEach(link => {
 
             link.addEventListener("click", () => {
+
                 navLinks.classList.remove("active");
-                menuToggle.setAttribute("aria-expanded", "false");
+
+                menuToggle.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
             });
 
         });
@@ -38,12 +48,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       CLOSE MOBILE MENU WHEN CLICKING OUTSIDE
+       CLOSE MENU WHEN CLICKING OUTSIDE
     ===================================================== */
 
-    document.addEventListener("click", (event) => {
+    document.addEventListener("click", event => {
 
-        if (!navLinks || !menuToggle) return;
+        if (!navLinks || !menuToggle) {
+            return;
+        }
 
         const clickedInsideMenu =
             navLinks.contains(event.target);
@@ -56,15 +68,21 @@ document.addEventListener("DOMContentLoaded", () => {
             !clickedInsideMenu &&
             !clickedToggle
         ) {
+
             navLinks.classList.remove("active");
-            menuToggle.setAttribute("aria-expanded", "false");
+
+            menuToggle.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
         }
 
     });
 
 
     /* =====================================================
-       SCROLL REVEAL ANIMATIONS
+       SCROLL REVEAL
     ===================================================== */
 
     const revealElements = document.querySelectorAll(
@@ -76,34 +94,50 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-    const revealObserver = new IntersectionObserver(
-        (entries, observer) => {
+    if ("IntersectionObserver" in window) {
 
-            entries.forEach(entry => {
+        const revealObserver =
+            new IntersectionObserver(
+                (entries, observer) => {
 
-                if (entry.isIntersecting) {
+                    entries.forEach(entry => {
 
-                    entry.target.classList.add("visible");
+                        if (entry.isIntersecting) {
 
-                    observer.unobserve(entry.target);
+                            entry.target.classList.add(
+                                "visible"
+                            );
+
+                            observer.unobserve(
+                                entry.target
+                            );
+
+                        }
+
+                    });
+
+                },
+                {
+                    threshold: 0.12
                 }
-
-            });
-
-        },
-        {
-            threshold: 0.12
-        }
-    );
+            );
 
 
-    revealElements.forEach(element => {
-        revealObserver.observe(element);
-    });
+        revealElements.forEach(element => {
+            revealObserver.observe(element);
+        });
+
+    } else {
+
+        revealElements.forEach(element => {
+            element.classList.add("visible");
+        });
+
+    }
 
 
     /* =====================================================
-       STAGGER CARD ANIMATIONS
+       STAGGER ANIMATIONS
     ===================================================== */
 
     const cardGroups = [
@@ -116,7 +150,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     cardGroups.forEach(selector => {
 
-        const cards = document.querySelectorAll(selector);
+        const cards =
+            document.querySelectorAll(selector);
 
         cards.forEach((card, index) => {
 
@@ -129,7 +164,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       CONTACT FORM
+       CONTACT FORM → WHATSAPP
     ===================================================== */
 
     const contactForm =
@@ -141,79 +176,101 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (contactForm && formMessage) {
 
-        contactForm.addEventListener("submit", (event) => {
+        contactForm.addEventListener(
+            "submit",
+            event => {
 
-            event.preventDefault();
-
-
-            const name =
-                document.getElementById("name").value.trim();
-
-            const business =
-                document.getElementById("business").value.trim();
-
-            const email =
-                document.getElementById("email").value.trim();
-
-            const service =
-                document.getElementById("service").value;
-
-            const message =
-                document.getElementById("message").value.trim();
+                event.preventDefault();
 
 
-            if (!name || !email || !message) {
+                const name =
+                    document
+                        .getElementById("name")
+                        .value
+                        .trim();
+
+                const business =
+                    document
+                        .getElementById("business")
+                        .value
+                        .trim();
+
+                const email =
+                    document
+                        .getElementById("email")
+                        .value
+                        .trim();
+
+                const service =
+                    document
+                        .getElementById("service")
+                        .value;
+
+                const message =
+                    document
+                        .getElementById("message")
+                        .value
+                        .trim();
+
+
+                if (!name || !email || !message) {
+
+                    formMessage.textContent =
+                        "Please fill in your name, email and project details.";
+
+                    formMessage.classList.add("show");
+
+                    return;
+                }
+
+
+                /*
+                    Correct Painstaking WhatsApp number:
+                    08107348296
+
+                    International format:
+                    2348107348296
+                */
+
+                const whatsappNumber =
+                    "2348107348296";
+
+
+                const whatsappText =
+                    `Hello Painstaking Web Development.
+
+Name: ${name}
+Business: ${business || "Not provided"}
+Email: ${email}
+Service: ${service}
+
+Project Details:
+${message}`;
+
+
+                const whatsappURL =
+                    `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+                        whatsappText
+                    )}`;
+
 
                 formMessage.textContent =
-                    "Please fill in your name, email and project details.";
+                    "Opening WhatsApp with your project request...";
 
-                formMessage.style.display = "block";
+                formMessage.classList.add("show");
 
-                return;
+
+                setTimeout(() => {
+
+                    window.open(
+                        whatsappURL,
+                        "_blank"
+                    );
+
+                }, 500);
+
             }
-
-
-            /*
-                GitHub Pages is static, so there is no backend
-                receiving form submissions.
-
-                Instead, we create a WhatsApp message containing
-                the customer's project details.
-            */
-
-            const whatsappNumber = "2348107383296";
-
-
-            const whatsappMessage =
-                `Hello Painstaking Web Development.%0A%0A` +
-                `Name: ${encodeURIComponent(name)}%0A` +
-                `Business: ${encodeURIComponent(business || "Not provided")}%0A` +
-                `Email: ${encodeURIComponent(email)}%0A` +
-                `Service: ${encodeURIComponent(service)}%0A%0A` +
-                `Project Details:%0A${encodeURIComponent(message)}`;
-
-
-            const whatsappURL =
-                `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
-
-
-            formMessage.textContent =
-                "Opening WhatsApp with your project request...";
-
-            formMessage.style.display = "block";
-
-
-            setTimeout(() => {
-
-                window.open(
-                    whatsappURL,
-                    "_blank",
-                    "noopener,noreferrer"
-                );
-
-            }, 500);
-
-        });
+        );
 
     }
 
@@ -245,125 +302,168 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
 
             },
-            { passive: true }
+            {
+                passive: true
+            }
         );
 
     }
 
 
     /* =====================================================
-       CURRENT NAVIGATION SECTION
+       ACTIVE NAVIGATION
     ===================================================== */
 
     const sections =
-        document.querySelectorAll("main section[id]");
+        document.querySelectorAll(
+            "main section[id]"
+        );
 
     const navigationLinks =
-        document.querySelectorAll(".nav-links a");
-
-
-    const sectionObserver =
-        new IntersectionObserver(
-            (entries) => {
-
-                entries.forEach(entry => {
-
-                    if (entry.isIntersecting) {
-
-                        navigationLinks.forEach(link => {
-                            link.classList.remove("current");
-                        });
-
-
-                        const activeLink =
-                            document.querySelector(
-                                `.nav-links a[href="#${entry.target.id}"]`
-                            );
-
-
-                        if (activeLink) {
-                            activeLink.classList.add("current");
-                        }
-
-                    }
-
-                });
-
-            },
-            {
-                rootMargin: "-35% 0px -55% 0px"
-            }
+        document.querySelectorAll(
+            ".nav-links a"
         );
 
 
-    sections.forEach(section => {
-        sectionObserver.observe(section);
-    });
+    if ("IntersectionObserver" in window) {
+
+        const sectionObserver =
+            new IntersectionObserver(
+                entries => {
+
+                    entries.forEach(entry => {
+
+                        if (entry.isIntersecting) {
+
+                            navigationLinks.forEach(
+                                link => {
+                                    link.classList.remove(
+                                        "current"
+                                    );
+                                }
+                            );
+
+
+                            const activeLink =
+                                document.querySelector(
+                                    `.nav-links a[href="#${entry.target.id}"]`
+                                );
+
+
+                            if (activeLink) {
+
+                                activeLink.classList.add(
+                                    "current"
+                                );
+
+                            }
+
+                        }
+
+                    });
+
+                },
+                {
+                    rootMargin:
+                        "-35% 0px -55% 0px"
+                }
+            );
+
+
+        sections.forEach(section => {
+            sectionObserver.observe(section);
+        });
+
+    }
 
 
     /* =====================================================
-       BUTTON RIPPLE EFFECT
+       BUTTON RIPPLE
     ===================================================== */
 
     document.querySelectorAll(".btn").forEach(button => {
 
-        button.addEventListener("click", function(event) {
+        button.addEventListener(
+            "click",
+            function(event) {
 
-            const ripple =
-                document.createElement("span");
+                const ripple =
+                    document.createElement("span");
 
-            const rect =
-                this.getBoundingClientRect();
+                const rect =
+                    this.getBoundingClientRect();
 
-            const size =
-                Math.max(rect.width, rect.height);
-
-
-            ripple.style.width = `${size}px`;
-            ripple.style.height = `${size}px`;
-
-            ripple.style.position = "absolute";
-            ripple.style.borderRadius = "50%";
-            ripple.style.background =
-                "rgba(255, 255, 255, 0.12)";
-
-            ripple.style.pointerEvents = "none";
-
-            ripple.style.left =
-                `${event.clientX - rect.left - size / 2}px`;
-
-            ripple.style.top =
-                `${event.clientY - rect.top - size / 2}px`;
-
-            ripple.style.transform = "scale(0)";
-            ripple.style.animation =
-                "buttonRipple 0.5s ease-out";
-
-            this.style.position = "relative";
-            this.style.overflow = "hidden";
-
-            this.appendChild(ripple);
+                const size =
+                    Math.max(
+                        rect.width,
+                        rect.height
+                    );
 
 
-            setTimeout(() => {
-                ripple.remove();
-            }, 500);
+                ripple.style.width =
+                    `${size}px`;
 
-        });
+                ripple.style.height =
+                    `${size}px`;
+
+                ripple.style.position =
+                    "absolute";
+
+                ripple.style.borderRadius =
+                    "50%";
+
+                ripple.style.background =
+                    "rgba(255, 255, 255, 0.12)";
+
+                ripple.style.pointerEvents =
+                    "none";
+
+                ripple.style.left =
+                    `${event.clientX - rect.left - size / 2}px`;
+
+                ripple.style.top =
+                    `${event.clientY - rect.top - size / 2}px`;
+
+                ripple.style.transform =
+                    "scale(0)";
+
+                ripple.style.animation =
+                    "buttonRipple 0.5s ease-out";
+
+
+                this.style.position =
+                    "relative";
+
+                this.style.overflow =
+                    "hidden";
+
+
+                this.appendChild(ripple);
+
+
+                setTimeout(() => {
+                    ripple.remove();
+                }, 500);
+
+            }
+        );
 
     });
 
 
     /* =====================================================
-       DYNAMIC YEAR
+       FOOTER YEAR
     ===================================================== */
 
-    const footerYear =
-        document.querySelector(".footer-bottom span");
+    const footerCopyright =
+        document.querySelector(
+            ".footer-bottom span"
+        );
 
-    if (footerYear) {
 
-        footerYear.textContent =
+    if (footerCopyright) {
+
+        footerCopyright.textContent =
             `© ${new Date().getFullYear()} Painstaking Web Development. All rights reserved.`;
 
     }
