@@ -1,6 +1,7 @@
 /* =========================================================
    PAINSTAKING WEB DEVELOPMENT
    Main JavaScript
+   Matched to the current index.html and style.css
 ========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -18,10 +19,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
             event.stopPropagation();
 
-            navLinks.classList.toggle("active");
+            navLinks.classList.toggle("open");
 
-            const isOpen =
-                navLinks.classList.contains("active");
+            const isOpen = navLinks.classList.contains("open");
 
             menuToggle.setAttribute(
                 "aria-expanded",
@@ -34,7 +34,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     ? "Close navigation menu"
                     : "Open navigation menu"
             );
-
         });
 
 
@@ -42,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             link.addEventListener("click", () => {
 
-                navLinks.classList.remove("active");
+                navLinks.classList.remove("open");
 
                 menuToggle.setAttribute(
                     "aria-expanded",
@@ -72,12 +71,12 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         if (
-            navLinks.classList.contains("active") &&
+            navLinks.classList.contains("open") &&
             !navLinks.contains(event.target) &&
             !menuToggle.contains(event.target)
         ) {
 
-            navLinks.classList.remove("active");
+            navLinks.classList.remove("open");
 
             menuToggle.setAttribute(
                 "aria-expanded",
@@ -88,7 +87,34 @@ document.addEventListener("DOMContentLoaded", () => {
                 "aria-label",
                 "Open navigation menu"
             );
+        }
 
+    });
+
+
+    /* =====================================================
+       ESCAPE KEY — CLOSE MOBILE MENU
+    ===================================================== */
+
+    document.addEventListener("keydown", event => {
+
+        if (
+            event.key === "Escape" &&
+            navLinks &&
+            menuToggle
+        ) {
+
+            navLinks.classList.remove("open");
+
+            menuToggle.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+            menuToggle.setAttribute(
+                "aria-label",
+                "Open navigation menu"
+            );
         }
 
     });
@@ -99,12 +125,13 @@ document.addEventListener("DOMContentLoaded", () => {
     ===================================================== */
 
     const revealElements = document.querySelectorAll(
+        ".reveal, " +
         ".service-card, " +
         ".project-card, " +
         ".about-card, " +
         ".about-content, " +
-        ".process-step, " +
-        ".price-card, " +
+        ".process-card, " +
+        ".pricing-card, " +
         ".contact-form, " +
         ".contact-content"
     );
@@ -117,31 +144,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if ("IntersectionObserver" in window) {
 
-        const revealObserver =
-            new IntersectionObserver(
-                (entries, observer) => {
+        const revealObserver = new IntersectionObserver(
+            (entries, observer) => {
 
-                    entries.forEach(entry => {
+                entries.forEach(entry => {
 
-                        if (entry.isIntersecting) {
+                    if (entry.isIntersecting) {
 
-                            entry.target.classList.add(
-                                "visible"
-                            );
+                        entry.target.classList.add("visible");
 
-                            observer.unobserve(
-                                entry.target
-                            );
+                        observer.unobserve(entry.target);
+                    }
 
-                        }
+                });
 
-                    });
-
-                },
-                {
-                    threshold: 0.12
-                }
-            );
+            },
+            {
+                threshold: 0.12
+            }
+        );
 
 
         revealElements.forEach(element => {
@@ -164,15 +185,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const cardGroups = [
         ".services-grid .service-card",
         ".projects-grid .project-card",
-        ".pricing-grid .price-card",
-        ".process-grid .process-step"
+        ".process-grid .process-card",
+        ".pricing-grid .pricing-card"
     ];
 
 
     cardGroups.forEach(selector => {
 
-        const cards =
-            document.querySelectorAll(selector);
+        const cards = document.querySelectorAll(selector);
 
         cards.forEach((card, index) => {
 
@@ -197,96 +217,77 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (contactForm && formMessage) {
 
-        contactForm.addEventListener(
-            "submit",
-            event => {
+        contactForm.addEventListener("submit", event => {
 
-                event.preventDefault();
+            event.preventDefault();
 
 
-                const name =
-                    document
-                        .getElementById("name")
-                        ?.value
-                        .trim();
+            const name =
+                document.getElementById("name")?.value.trim();
 
-                const business =
-                    document
-                        .getElementById("business")
-                        ?.value
-                        .trim();
+            const business =
+                document.getElementById("business")?.value.trim();
 
-                const email =
-                    document
-                        .getElementById("email")
-                        ?.value
-                        .trim();
+            const email =
+                document.getElementById("email")?.value.trim();
 
-                const service =
-                    document
-                        .getElementById("service")
-                        ?.value;
+            const service =
+                document.getElementById("service")?.value;
 
-                const message =
-                    document
-                        .getElementById("message")
-                        ?.value
-                        .trim();
+            const message =
+                document.getElementById("message")?.value.trim();
 
 
-                if (!name || !email || !message) {
+            if (!name || !email || !service || !message) {
 
-                    formMessage.textContent =
-                        "Please fill in your name, email and project details.";
+                formMessage.textContent =
+                    "Please fill in all required fields.";
 
-                    formMessage.classList.add("show");
+                formMessage.classList.add("show");
 
-                    return;
-                }
-
-
-                /* WhatsApp number */
-
-                const whatsappNumber =
-                    "2348107348296";
+                return;
+            }
 
 
-                const whatsappText =
-                    `Hello Painstaking Web Development.
+            const whatsappNumber =
+                "2348107348296";
+
+
+            const whatsappText =
+                `Hello Painstaking Web Development.
 
 Name: ${name}
 Business: ${business || "Not provided"}
 Email: ${email}
-Service: ${service || "Not specified"}
+Service: ${service}
 
 Project Details:
 ${message}`;
 
 
-                const whatsappURL =
-                    `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
-                        whatsappText
-                    )}`;
+            const whatsappURL =
+                `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+                    whatsappText
+                )}`;
 
 
-                formMessage.textContent =
-                    "Opening WhatsApp with your project request...";
+            formMessage.textContent =
+                "Opening WhatsApp with your project request...";
 
-                formMessage.classList.add("show");
+            formMessage.classList.add("show");
 
 
-                setTimeout(() => {
+            setTimeout(() => {
 
-                    window.open(
-                        whatsappURL,
-                        "_blank",
-                        "noopener,noreferrer"
-                    );
+                window.open(
+                    whatsappURL,
+                    "_blank",
+                    "noopener,noreferrer"
+                );
 
-                }, 500);
+            }, 500);
 
-            }
-        );
+        });
 
     }
 
@@ -299,32 +300,31 @@ ${message}`;
         document.querySelector(".navbar");
 
 
-    const updateNavbar =
-        () => {
+    const updateNavbar = () => {
 
-            if (!navbar) {
-                return;
-            }
+        if (!navbar) {
+            return;
+        }
 
-            if (window.scrollY > 30) {
+        if (window.scrollY > 30) {
 
-                navbar.style.background =
-                    "rgba(5, 7, 11, 0.96)";
+            navbar.style.background =
+                "rgba(5, 7, 11, 0.96)";
 
-                navbar.style.boxShadow =
-                    "0 10px 35px rgba(0, 0, 0, 0.25)";
+            navbar.style.boxShadow =
+                "0 10px 35px rgba(0, 0, 0, 0.25)";
 
-            } else {
+        } else {
 
-                navbar.style.background =
-                    "rgba(5, 7, 11, 0.86)";
+            navbar.style.background =
+                "rgba(8, 8, 13, 0.88)";
 
-                navbar.style.boxShadow =
-                    "none";
+            navbar.style.boxShadow =
+                "none";
 
-            }
+        }
 
-        };
+    };
 
 
     updateNavbar();
@@ -350,7 +350,7 @@ ${message}`;
 
     const navigationLinks =
         document.querySelectorAll(
-            ".nav-links a"
+            ".nav-links a.nav-link"
         );
 
 
@@ -368,15 +368,9 @@ ${message}`;
 
                         if (entry.isIntersecting) {
 
-                            navigationLinks.forEach(
-                                link => {
-
-                                    link.classList.remove(
-                                        "current"
-                                    );
-
-                                }
-                            );
+                            navigationLinks.forEach(link => {
+                                link.classList.remove("active");
+                            });
 
 
                             const activeLink =
@@ -387,9 +381,7 @@ ${message}`;
 
                             if (activeLink) {
 
-                                activeLink.classList.add(
-                                    "current"
-                                );
+                                activeLink.classList.add("active");
 
                             }
 
@@ -418,128 +410,87 @@ ${message}`;
 
     document.querySelectorAll(".btn").forEach(button => {
 
-        button.addEventListener(
-            "click",
-            function(event) {
+        button.addEventListener("click", function(event) {
 
-                const ripple =
-                    document.createElement("span");
+            const ripple =
+                document.createElement("span");
 
-                const rect =
-                    this.getBoundingClientRect();
+            const rect =
+                this.getBoundingClientRect();
 
-                const size =
-                    Math.max(
-                        rect.width,
-                        rect.height
-                    );
+            const size =
+                Math.max(rect.width, rect.height);
 
 
-                ripple.style.width =
-                    `${size}px`;
+            ripple.style.width =
+                `${size}px`;
 
-                ripple.style.height =
-                    `${size}px`;
+            ripple.style.height =
+                `${size}px`;
 
-                ripple.style.position =
-                    "absolute";
+            ripple.style.position =
+                "absolute";
 
-                ripple.style.borderRadius =
-                    "50%";
+            ripple.style.borderRadius =
+                "50%";
 
-                ripple.style.background =
-                    "rgba(255, 255, 255, 0.12)";
+            ripple.style.background =
+                "rgba(255, 255, 255, 0.12)";
 
-                ripple.style.pointerEvents =
-                    "none";
+            ripple.style.pointerEvents =
+                "none";
 
-                ripple.style.left =
-                    `${event.clientX - rect.left - size / 2}px`;
+            ripple.style.left =
+                `${event.clientX - rect.left - size / 2}px`;
 
-                ripple.style.top =
-                    `${event.clientY - rect.top - size / 2}px`;
+            ripple.style.top =
+                `${event.clientY - rect.top - size / 2}px`;
 
-                ripple.style.transform =
-                    "scale(0)";
+            ripple.style.transform =
+                "scale(0)";
 
-                ripple.style.animation =
-                    "buttonRipple 0.5s ease-out";
-
-
-                this.style.position =
-                    "relative";
-
-                this.style.overflow =
-                    "hidden";
+            ripple.style.animation =
+                "buttonRipple 0.5s ease-out";
 
 
-                this.appendChild(ripple);
+            this.style.position =
+                "relative";
+
+            this.style.overflow =
+                "hidden";
 
 
-                setTimeout(() => {
+            this.appendChild(ripple);
 
-                    ripple.remove();
 
-                }, 500);
+            setTimeout(() => {
+                ripple.remove();
+            }, 500);
 
-            }
-        );
+        });
 
     });
-
-
-    /* =====================================================
-       ESCAPE KEY — CLOSE MOBILE MENU
-    ===================================================== */
-
-    document.addEventListener(
-        "keydown",
-        event => {
-
-            if (
-                event.key === "Escape" &&
-                navLinks &&
-                menuToggle
-            ) {
-
-                navLinks.classList.remove("active");
-
-                menuToggle.setAttribute(
-                    "aria-expanded",
-                    "false"
-                );
-
-                menuToggle.setAttribute(
-                    "aria-label",
-                    "Open navigation menu"
-                );
-
-            }
-
-        }
-    );
 
 
     /* =====================================================
        FOOTER YEAR
     ===================================================== */
 
-    const footerCopyright =
-        document.querySelector(
-            ".footer-bottom span"
-        );
+    const footerYear =
+        document.getElementById("year");
 
 
-    if (footerCopyright) {
+    if (footerYear) {
 
-        footerCopyright.textContent =
-            `© ${new Date().getFullYear()} Painstaking Web Development. All rights reserved.`;
+        footerYear.textContent =
+            new Date().getFullYear();
 
     }
 
 
     /* =====================================================
-       LOGO FALLBACK
+       LOGO IMAGE FALLBACK
+       Kept ready for when the logo is added later.
     ===================================================== */
 
     document.querySelectorAll(".logo img").forEach(logo => {
