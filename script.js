@@ -1,506 +1,139 @@
-/* =========================================================
-   PAINSTAKING WEB DEVELOPMENT
-   Main JavaScript
-   Matched to the current index.html and style.css
-========================================================= */
-
-document.addEventListener("DOMContentLoaded", () => {
-
-    /* =====================================================
-       MOBILE NAVIGATION
-    ===================================================== */
-
-    const menuToggle = document.querySelector(".menu-toggle");
-    const navLinks = document.querySelector(".nav-links");
-
-    if (menuToggle && navLinks) {
-
-        menuToggle.addEventListener("click", (event) => {
-
-            event.stopPropagation();
-
-            navLinks.classList.toggle("open");
-
-            const isOpen = navLinks.classList.contains("open");
-
-            menuToggle.setAttribute(
-                "aria-expanded",
-                String(isOpen)
-            );
-
-            menuToggle.setAttribute(
-                "aria-label",
-                isOpen
-                    ? "Close navigation menu"
-                    : "Open navigation menu"
-            );
-        });
-
-
-        navLinks.querySelectorAll("a").forEach(link => {
-
-            link.addEventListener("click", () => {
-
-                navLinks.classList.remove("open");
-
-                menuToggle.setAttribute(
-                    "aria-expanded",
-                    "false"
-                );
-
-                menuToggle.setAttribute(
-                    "aria-label",
-                    "Open navigation menu"
-                );
-
-            });
-
-        });
-
-    }
-
-
-    /* =====================================================
-       CLOSE MOBILE MENU OUTSIDE
-    ===================================================== */
-
-    document.addEventListener("click", event => {
-
-        if (!navLinks || !menuToggle) {
-            return;
-        }
-
-        if (
-            navLinks.classList.contains("open") &&
-            !navLinks.contains(event.target) &&
-            !menuToggle.contains(event.target)
-        ) {
-
-            navLinks.classList.remove("open");
-
-            menuToggle.setAttribute(
-                "aria-expanded",
-                "false"
-            );
-
-            menuToggle.setAttribute(
-                "aria-label",
-                "Open navigation menu"
-            );
-        }
-
-    });
-
-
-    /* =====================================================
-       ESCAPE KEY — CLOSE MOBILE MENU
-    ===================================================== */
-
-    document.addEventListener("keydown", event => {
-
-        if (
-            event.key === "Escape" &&
-            navLinks &&
-            menuToggle
-        ) {
-
-            navLinks.classList.remove("open");
-
-            menuToggle.setAttribute(
-                "aria-expanded",
-                "false"
-            );
-
-            menuToggle.setAttribute(
-                "aria-label",
-                "Open navigation menu"
-            );
-        }
-
-    });
-
-
-    /* =====================================================
-       SCROLL REVEAL
-    ===================================================== */
-
-    const revealElements = document.querySelectorAll(
-        ".reveal, " +
-        ".service-card, " +
-        ".project-card, " +
-        ".about-card, " +
-        ".about-content, " +
-        ".process-card, " +
-        ".pricing-card, " +
-        ".contact-form, " +
-        ".contact-content"
-    );
-
-
-    revealElements.forEach(element => {
-        element.classList.add("reveal");
-    });
-
-
-    if ("IntersectionObserver" in window) {
-
-        const revealObserver = new IntersectionObserver(
-            (entries, observer) => {
-
-                entries.forEach(entry => {
-
-                    if (entry.isIntersecting) {
-
-                        entry.target.classList.add("visible");
-
-                        observer.unobserve(entry.target);
-                    }
-
-                });
-
-            },
-            {
-                threshold: 0.12
-            }
-        );
-
-
-        revealElements.forEach(element => {
-            revealObserver.observe(element);
-        });
-
-    } else {
-
-        revealElements.forEach(element => {
-            element.classList.add("visible");
-        });
-
-    }
-
-
-    /* =====================================================
-       STAGGER ANIMATIONS
-    ===================================================== */
-
-    const cardGroups = [
-        ".services-grid .service-card",
-        ".projects-grid .project-card",
-        ".process-grid .process-card",
-        ".pricing-grid .pricing-card"
-    ];
-
-
-    cardGroups.forEach(selector => {
-
-        const cards = document.querySelectorAll(selector);
-
-        cards.forEach((card, index) => {
-
-            card.style.transitionDelay =
-                `${index * 0.08}s`;
-
-        });
-
-    });
-
-
-    /* =====================================================
-       CONTACT FORM → WHATSAPP
-    ===================================================== */
-
-    const contactForm =
-        document.getElementById("contactForm");
-
-    const formMessage =
-        document.getElementById("formMessage");
-
-
-    if (contactForm && formMessage) {
-
-        contactForm.addEventListener("submit", event => {
-
-            event.preventDefault();
-
-
-            const name =
-                document.getElementById("name")?.value.trim();
-
-            const business =
-                document.getElementById("business")?.value.trim();
-
-            const email =
-                document.getElementById("email")?.value.trim();
-
-            const service =
-                document.getElementById("service")?.value;
-
-            const message =
-                document.getElementById("message")?.value.trim();
-
-
-            if (!name || !email || !service || !message) {
-
-                formMessage.textContent =
-                    "Please fill in all required fields.";
-
-                formMessage.classList.add("show");
-
-                return;
-            }
-
-
-            const whatsappNumber =
-                "2348107348296";
-
-
-            const whatsappText =
-                `Hello Painstaking Web Development.
-
-Name: ${name}
-Business: ${business || "Not provided"}
-Email: ${email}
-Service: ${service}
-
-Project Details:
-${message}`;
-
-
-            const whatsappURL =
-                `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
-                    whatsappText
-                )}`;
-
-
-            formMessage.textContent =
-                "Opening WhatsApp with your project request...";
-
-            formMessage.classList.add("show");
-
-
-            setTimeout(() => {
-
-                window.open(
-                    whatsappURL,
-                    "_blank",
-                    "noopener,noreferrer"
-                );
-
-            }, 500);
-
-        });
-
-    }
-
-
-    /* =====================================================
-       NAVBAR SCROLL EFFECT
-    ===================================================== */
-
-    const navbar =
-        document.querySelector(".navbar");
-
-
-    const updateNavbar = () => {
-
-        if (!navbar) {
-            return;
-        }
-
-        if (window.scrollY > 30) {
-
-            navbar.style.background =
-                "rgba(5, 7, 11, 0.96)";
-
-            navbar.style.boxShadow =
-                "0 10px 35px rgba(0, 0, 0, 0.25)";
-
+/* ==========================================================================
+   Painstaking Web Development — Main Interactive Script
+   ========================================================================== */
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    // 1. Header Blur & Border Effect on Scroll
+    const header = document.querySelector('header');
+    
+    const handleScroll = () => {
+        if (window.scrollY > 20) {
+            header.style.boxShadow = '0 10px 30px -10px rgba(0, 0, 0, 0.8)';
+            header.style.borderBottomColor = 'rgba(59, 130, 246, 0.3)';
         } else {
-
-            navbar.style.background =
-                "rgba(8, 8, 13, 0.88)";
-
-            navbar.style.boxShadow =
-                "none";
-
+            header.style.boxShadow = 'none';
+            header.style.borderBottomColor = 'var(--border-color)';
         }
-
     };
 
-
-    updateNavbar();
-
-
-    window.addEventListener(
-        "scroll",
-        updateNavbar,
-        {
-            passive: true
-        }
-    );
+    window.addEventListener('scroll', handleScroll);
 
 
-    /* =====================================================
-       ACTIVE NAVIGATION
-    ===================================================== */
+    // 2. Smooth Scrolling for Navigation Links
+    const anchorLinks = document.querySelectorAll('a[href^="#"]');
 
-    const sections =
-        document.querySelectorAll(
-            "main section[id]"
-        );
+    anchorLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            const targetId = link.getAttribute('href');
+            if (targetId === '#') return;
 
-    const navigationLinks =
-        document.querySelectorAll(
-            ".nav-links a.nav-link"
-        );
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                e.preventDefault();
+                
+                // Offset calculation for sticky header (~80px)
+                const headerOffset = 80;
+                const elementPosition = targetElement.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
-
-    if (
-        "IntersectionObserver" in window &&
-        sections.length &&
-        navigationLinks.length
-    ) {
-
-        const sectionObserver =
-            new IntersectionObserver(
-                entries => {
-
-                    entries.forEach(entry => {
-
-                        if (entry.isIntersecting) {
-
-                            navigationLinks.forEach(link => {
-                                link.classList.remove("active");
-                            });
-
-
-                            const activeLink =
-                                document.querySelector(
-                                    `.nav-links a[href="#${entry.target.id}"]`
-                                );
-
-
-                            if (activeLink) {
-
-                                activeLink.classList.add("active");
-
-                            }
-
-                        }
-
-                    });
-
-                },
-                {
-                    rootMargin:
-                        "-35% 0px -55% 0px"
-                }
-            );
-
-
-        sections.forEach(section => {
-            sectionObserver.observe(section);
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
         });
-
-    }
-
-
-    /* =====================================================
-       BUTTON RIPPLE
-    ===================================================== */
-
-    document.querySelectorAll(".btn").forEach(button => {
-
-        button.addEventListener("click", function(event) {
-
-            const ripple =
-                document.createElement("span");
-
-            const rect =
-                this.getBoundingClientRect();
-
-            const size =
-                Math.max(rect.width, rect.height);
-
-
-            ripple.style.width =
-                `${size}px`;
-
-            ripple.style.height =
-                `${size}px`;
-
-            ripple.style.position =
-                "absolute";
-
-            ripple.style.borderRadius =
-                "50%";
-
-            ripple.style.background =
-                "rgba(255, 255, 255, 0.12)";
-
-            ripple.style.pointerEvents =
-                "none";
-
-            ripple.style.left =
-                `${event.clientX - rect.left - size / 2}px`;
-
-            ripple.style.top =
-                `${event.clientY - rect.top - size / 2}px`;
-
-            ripple.style.transform =
-                "scale(0)";
-
-            ripple.style.animation =
-                "buttonRipple 0.5s ease-out";
-
-
-            this.style.position =
-                "relative";
-
-            this.style.overflow =
-                "hidden";
-
-
-            this.appendChild(ripple);
-
-
-            setTimeout(() => {
-                ripple.remove();
-            }, 500);
-
-        });
-
     });
 
 
-    /* =====================================================
-       FOOTER YEAR
-    ===================================================== */
+    // 3. Contact Form Real-Time & Submission Validation
+    const contactForm = document.getElementById('projectForm');
 
-    const footerYear =
-        document.getElementById("year");
+    if (contactForm) {
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const messageInput = document.getElementById('message');
+        const submitBtn = contactForm.querySelector('button[type="submit"]');
 
+        // Helper: Validate email format
+        const isValidEmail = (email) => {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        };
 
-    if (footerYear) {
+        // Helper: Highlight error on field
+        const setFieldError = (element, message) => {
+            element.style.borderColor = '#ef4444';
+            
+            let errorText = element.nextElementSibling;
+            if (!errorText || !errorText.classList.contains('error-msg')) {
+                errorText = document.createElement('span');
+                errorText.className = 'error-msg';
+                errorText.style.color = '#ef4444';
+                errorText.style.fontSize = '0.75rem';
+                errorText.style.marginTop = '0.25rem';
+                element.parentNode.insertBefore(errorText, element.nextSibling);
+            }
+            errorText.textContent = message;
+        };
 
-        footerYear.textContent =
-            new Date().getFullYear();
+        // Helper: Clear error on field
+        const clearFieldError = (element) => {
+            element.style.borderColor = 'var(--border-color)';
+            const errorText = element.nextElementSibling;
+            if (errorText && errorText.classList.contains('error-msg')) {
+                errorText.remove();
+            }
+        };
 
-    }
-
-
-    /* =====================================================
-       LOGO IMAGE FALLBACK
-       Kept ready for when the logo is added later.
-    ===================================================== */
-
-    document.querySelectorAll(".logo img").forEach(logo => {
-
-        logo.addEventListener("error", () => {
-
-            logo.style.display = "none";
-
+        // Real-time input cleaning
+        [nameInput, emailInput, messageInput].forEach(input => {
+            if (input) {
+                input.addEventListener('input', () => clearFieldError(input));
+            }
         });
 
-    });
+        // Form Submit Validation Handler
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            let isValid = true;
+
+            // Validate Name
+            if (!nameInput.value.trim()) {
+                setFieldError(nameInput, 'Please enter your name.');
+                isValid = false;
+            }
+
+            // Validate Email
+            if (!emailInput.value.trim()) {
+                setFieldError(emailInput, 'Please enter your email address.');
+                isValid = false;
+            } else if (!isValidEmail(emailInput.value.trim())) {
+                setFieldError(emailInput, 'Please enter a valid email address.');
+                isValid = false;
+            }
+
+            // Validate Message
+            if (!messageInput.value.trim()) {
+                setFieldError(messageInput, 'Please provide brief details about your project.');
+                isValid = false;
+            }
+
+            // If valid, simulate submission
+            if (isValid) {
+                const originalText = submitBtn.textContent;
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Sending...';
+
+                setTimeout(() => {
+                    alert('Thank you! Your inquiry has been received. We will get back to you within 24 hours.');
+                    contactForm.reset();
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = originalText;
+                }, 1200);
+            }
+        });
+    }
 
 });
