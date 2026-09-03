@@ -6,35 +6,43 @@
 
     <title>Painstaking Web Development | Modern Websites. Built for Business.</title>
 
-    <meta name="description" content="Painstaking Web Development creates modern, responsive websites for businesses, restaurants, real estate companies, online stores and more.">
+    <meta name="description" content="Painstaking Web Development creates modern, responsive websites, online stores, landing pages and web applications for businesses.">
+
+    <meta name="theme-color" content="#08080d">
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- NAVIGATION -->
+    <!-- ================= NAVBAR ================= -->
+
     <header class="navbar">
         <div class="container nav-container">
 
-            <a href="#home" class="logo">
+            <a href="#home" class="logo" aria-label="Painstaking Web Development home">
                 <span class="logo-main">PAINSTAKING</span>
                 <span class="logo-sub">WEB DEVELOPMENT</span>
             </a>
 
-            <button class="menu-toggle" aria-label="Open navigation menu" aria-expanded="false">
+            <button
+                class="menu-toggle"
+                type="button"
+                aria-label="Open navigation menu"
+                aria-expanded="false"
+            >
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
 
-            <nav class="nav-links">
-                <a href="#home">Home</a>
-                <a href="#services">Services</a>
-                <a href="#projects">Projects</a>
-                <a href="#about">About</a>
-                <a href="#pricing">Pricing</a>
-                <a href="#contact" class="nav-button">Let's Talk</a>
+            <nav class="nav-links" aria-label="Main navigation">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#pricing" class="nav-link">Pricing</a>
+                <a href="#contact" class="nav-cta">Let's Talk</a>
             </nav>
 
         </div>
@@ -43,15 +51,19 @@
 
     <main>
 
-        <!-- HERO -->
+        <!-- ================= HERO ================= -->
+
         <section class="hero" id="home">
+
+            <div class="hero-glow hero-glow-one"></div>
+            <div class="hero-glow hero-glow-two"></div>
 
             <div class="container hero-container">
 
-                <div class="hero-content">
+                <div class="hero-content reveal">
 
                     <div class="hero-badge">
-                        <span></span>
+                        <span class="badge-dot"></span>
                         WEB DEVELOPMENT
                     </div>
 
@@ -61,21 +73,20 @@
                     </h1>
 
                     <p class="hero-text">
-                        We create clean, modern and responsive websites
-                        designed to give businesses a professional presence
-                        online.
+                        We create modern, responsive and professional websites
+                        that help businesses build credibility, attract customers
+                        and grow online.
                     </p>
 
                     <div class="hero-buttons">
-
                         <a href="#projects" class="btn btn-primary">
                             View Our Work
+                            <span>↗</span>
                         </a>
 
                         <a href="#contact" class="btn btn-secondary">
                             Start a Project
                         </a>
-
                     </div>
 
                     <div class="hero-stats">
@@ -100,7 +111,9 @@
                 </div>
 
 
-                <div class="hero-visual">
+                <!-- HERO VISUAL -->
+
+                <div class="hero-visual reveal">
 
                     <div class="visual-glow"></div>
 
@@ -114,29 +127,39 @@
                                 <span></span>
                             </div>
 
-                            <span>website.html</span>
+                            <span class="window-title">
+                                website.html
+                            </span>
 
                         </div>
 
                         <div class="code-content">
 
-                            <div>
+                            <div class="code-line">
                                 <span class="code-purple">&lt;website&gt;</span>
                             </div>
 
-                            <div class="indent">
+                            <div class="code-line indent">
                                 <span class="code-gray">&lt;business&gt;</span>
                             </div>
 
-                            <div class="indent double">
-                                <span class="code-white">Your business.</span>
+                            <div class="code-line indent double">
+                                <span class="code-white">
+                                    Your business.
+                                </span>
                             </div>
 
-                            <div class="indent">
+                            <div class="code-line indent double">
+                                <span class="code-blue">
+                                    deserves a better online presence.
+                                </span>
+                            </div>
+
+                            <div class="code-line indent">
                                 <span class="code-gray">&lt;/business&gt;</span>
                             </div>
 
-                            <div>
+                            <div class="code-line">
                                 <span class="code-purple">&lt;/website&gt;</span>
                             </div>
 
@@ -149,158 +172,120 @@
                 </div>
 
             </div>
-
         </section>
 
 
-        <!-- SERVICES -->
+        <!-- ================= SERVICES ================= -->
+
         <section class="section services" id="services">
 
             <div class="container">
 
-                <div class="section-heading">
-
-                    <span class="section-label">WHAT WE DO</span>
-
-                    <h2>
-                        Websites designed around
-                        <span>your business.</span>
-                    </h2>
-
+                <div class="section-heading reveal">
+                    <span class="section-label">WHAT WE BUILD</span>
+                    <h2>Websites designed<br>to <span>move business forward.</span></h2>
                     <p>
-                        From simple business websites to complete online
-                        storefronts, we build digital experiences that help
-                        businesses look professional online.
+                        From simple business websites to complete online stores,
+                        we build digital experiences around your goals.
                     </p>
-
                 </div>
 
 
                 <div class="services-grid">
 
-                    <article class="service-card">
-
+                    <article class="service-card reveal">
                         <div class="service-number">01</div>
-
                         <div class="service-icon">⌘</div>
-
                         <h3>Business Websites</h3>
-
                         <p>
-                            Professional websites that clearly present your
-                            business, services and brand to potential customers.
+                            Professional websites that establish your brand
+                            online and make it easy for customers to find you.
                         </p>
-
+                        <span class="service-link">Learn more ↗</span>
                     </article>
 
 
-                    <article class="service-card">
-
+                    <article class="service-card reveal">
                         <div class="service-number">02</div>
-
                         <div class="service-icon">◈</div>
-
                         <h3>Restaurant Websites</h3>
-
                         <p>
-                            Attractive restaurant websites for menus,
-                            locations, reservations and customer discovery.
+                            Beautiful restaurant websites with menus,
+                            contact details, locations and online ordering options.
                         </p>
-
+                        <span class="service-link">Learn more ↗</span>
                     </article>
 
 
-                    <article class="service-card">
-
+                    <article class="service-card reveal">
                         <div class="service-number">03</div>
-
                         <div class="service-icon">▦</div>
-
                         <h3>E-Commerce Websites</h3>
-
                         <p>
-                            Modern storefront experiences designed to showcase
-                            products and make online shopping easier.
+                            Online stores designed to showcase products,
+                            attract customers and support online sales.
                         </p>
-
+                        <span class="service-link">Learn more ↗</span>
                     </article>
 
 
-                    <article class="service-card">
-
+                    <article class="service-card reveal">
                         <div class="service-number">04</div>
-
                         <div class="service-icon">⌂</div>
-
                         <h3>Real Estate Websites</h3>
-
                         <p>
-                            Property-focused websites that showcase listings,
-                            locations and important property information.
+                            Property-focused websites that help agencies
+                            present listings and connect with potential buyers.
                         </p>
-
+                        <span class="service-link">Learn more ↗</span>
                     </article>
 
 
-                    <article class="service-card">
-
+                    <article class="service-card reveal">
                         <div class="service-number">05</div>
-
                         <div class="service-icon">↗</div>
-
                         <h3>Landing Pages</h3>
-
                         <p>
-                            Focused landing pages built to promote a product,
-                            service, campaign or business offer.
+                            Focused landing pages created to promote a product,
+                            service, campaign or business idea.
                         </p>
-
+                        <span class="service-link">Learn more ↗</span>
                     </article>
 
 
-                    <article class="service-card">
-
+                    <article class="service-card reveal">
                         <div class="service-number">06</div>
-
                         <div class="service-icon">↻</div>
-
                         <h3>Website Redesign</h3>
-
                         <p>
                             Transform an outdated website into a cleaner,
-                            modern and mobile-friendly experience.
+                            faster and more modern digital experience.
                         </p>
-
+                        <span class="service-link">Learn more ↗</span>
                     </article>
 
                 </div>
 
             </div>
-
         </section>
 
 
-        <!-- PROJECTS -->
+        <!-- ================= PROJECTS ================= -->
+
         <section class="section projects" id="projects">
 
             <div class="container">
 
-                <div class="section-heading projects-heading">
+                <div class="projects-heading">
 
-                    <div>
-
+                    <div class="section-heading reveal">
                         <span class="section-label">SELECTED WORK</span>
-
-                        <h2>
-                            Projects we've
-                            <span>built.</span>
-                        </h2>
-
+                        <h2>Projects we've<br><span>built.</span></h2>
                     </div>
 
-                    <p>
-                        Explore some of our website concepts and deployed
-                        projects across different industries.
+                    <p class="projects-intro reveal">
+                        A selection of websites created to give businesses
+                        a stronger and more professional online presence.
                     </p>
 
                 </div>
@@ -308,33 +293,24 @@
 
                 <div class="projects-grid">
 
-                    <!-- EMBER & OLIVE -->
-                    <article class="project-card">
 
-                        <div class="project-preview restaurant-preview">
+                    <article class="project-card reveal">
 
-                            <div class="preview-content">
-                                <span>EMBER & OLIVE</span>
-                                <small>RESTAURANT</small>
+                        <div class="project-preview project-restaurant">
+                            <div class="preview-overlay">
+                                <span>Restaurant Website</span>
                             </div>
 
+                            <div class="preview-content">
+                                <small>EMBER & OLIVE</small>
+                                <strong>Restaurant</strong>
+                            </div>
                         </div>
 
                         <div class="project-info">
-
                             <div>
-
-                                <span class="project-category">
-                                    Restaurant
-                                </span>
-
+                                <span class="project-category">Restaurant</span>
                                 <h3>Ember & Olive</h3>
-
-                                <p>
-                                    A modern restaurant website designed to
-                                    showcase food, atmosphere and services.
-                                </p>
-
                             </div>
 
                             <a
@@ -343,41 +319,30 @@
                                 rel="noopener noreferrer"
                                 class="project-link"
                             >
-                                View Website ↗
+                                Visit Site ↗
                             </a>
-
                         </div>
 
                     </article>
 
 
-                    <!-- URBAN THREAD -->
-                    <article class="project-card">
+                    <article class="project-card reveal">
 
-                        <div class="project-preview fashion-preview">
-
-                            <div class="preview-content">
-                                <span>URBAN THREAD</span>
-                                <small>FASHION STORE</small>
+                        <div class="project-preview project-fashion">
+                            <div class="preview-overlay">
+                                <span>E-Commerce Website</span>
                             </div>
 
+                            <div class="preview-content">
+                                <small>URBAN THREAD</small>
+                                <strong>Fashion Store</strong>
+                            </div>
                         </div>
 
                         <div class="project-info">
-
                             <div>
-
-                                <span class="project-category">
-                                    E-Commerce
-                                </span>
-
+                                <span class="project-category">E-Commerce</span>
                                 <h3>Urban Thread</h3>
-
-                                <p>
-                                    A modern fashion storefront concept with
-                                    a clean shopping-focused interface.
-                                </p>
-
                             </div>
 
                             <a
@@ -386,41 +351,30 @@
                                 rel="noopener noreferrer"
                                 class="project-link"
                             >
-                                View Website ↗
+                                Visit Site ↗
                             </a>
-
                         </div>
 
                     </article>
 
 
-                    <!-- HAVENSTONE -->
-                    <article class="project-card">
+                    <article class="project-card reveal">
 
-                        <div class="project-preview property-preview">
-
-                            <div class="preview-content">
-                                <span>HAVENSTONE</span>
-                                <small>PROPERTIES</small>
+                        <div class="project-preview project-realestate">
+                            <div class="preview-overlay">
+                                <span>Real Estate Website</span>
                             </div>
 
+                            <div class="preview-content">
+                                <small>HAVENSTONE</small>
+                                <strong>Properties</strong>
+                            </div>
                         </div>
 
                         <div class="project-info">
-
                             <div>
-
-                                <span class="project-category">
-                                    Real Estate
-                                </span>
-
+                                <span class="project-category">Real Estate</span>
                                 <h3>Havenstone Properties</h3>
-
-                                <p>
-                                    A property showcase website created for a
-                                    modern real estate brand.
-                                </p>
-
                             </div>
 
                             <a
@@ -429,47 +383,35 @@
                                 rel="noopener noreferrer"
                                 class="project-link"
                             >
-                                View Website ↗
+                                Visit Site ↗
                             </a>
-
                         </div>
 
                     </article>
 
 
-                    <!-- NEXT PROJECT -->
-                    <article class="project-card coming-project">
+                    <article class="project-card project-next reveal">
 
-                        <div class="project-preview future-preview">
+                        <div class="project-preview project-next-preview">
+
+                            <div class="next-icon">+</div>
 
                             <div class="preview-content">
-                                <span>YOUR BUSINESS</span>
-                                <small>NEXT PROJECT</small>
+                                <small>COMING NEXT</small>
+                                <strong>Your Business</strong>
                             </div>
 
                         </div>
 
                         <div class="project-info">
-
                             <div>
-
-                                <span class="project-category">
-                                    Coming Soon
-                                </span>
-
-                                <h3>Your Business Could Be Next</h3>
-
-                                <p>
-                                    Have a business that needs a professional
-                                    website? Let's build it together.
-                                </p>
-
+                                <span class="project-category">Your Project</span>
+                                <h3>Let's build something great.</h3>
                             </div>
 
                             <a href="#contact" class="project-link">
-                                Start a Project ↗
+                                Start Project ↗
                             </a>
-
                         </div>
 
                     </article>
@@ -477,234 +419,184 @@
                 </div>
 
             </div>
-
         </section>
 
 
-        <!-- ABOUT -->
+        <!-- ================= ABOUT ================= -->
+
         <section class="section about" id="about">
 
             <div class="container about-grid">
 
-                <div class="about-visual">
+                <div class="about-content reveal">
 
-                    <div class="about-card">
-
-                        <span class="about-small">
-                            PAINSTAKING
-                        </span>
-
-                        <strong>
-                            WEB
-                            <br>
-                            DEVELOPMENT
-                        </strong>
-
-                        <div class="about-line"></div>
-
-                        <span class="about-year">
-                            EST. 2026
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-                <div class="about-content">
-
-                    <span class="section-label">
-                        ABOUT PAINSTAKING
-                    </span>
+                    <span class="section-label">ABOUT US</span>
 
                     <h2>
-                        Your business deserves a
-                        <span>better online presence.</span>
+                        We believe every
+                        business deserves a
+                        <span>strong digital presence.</span>
                     </h2>
 
                     <p>
-                        Painstaking Web Development helps businesses create
-                        modern websites that make a strong first impression
-                        online.
+                        Painstaking Web Development is focused on creating
+                        modern websites that look professional, work smoothly
+                        and help businesses compete in today's digital world.
                     </p>
 
                     <p>
-                        We focus on clean design, responsive layouts,
-                        straightforward user experiences and websites that
-                        represent each business professionally.
+                        We combine clean design, responsive development and
+                        business-focused thinking to create websites that
+                        are built for real people and real businesses.
                     </p>
 
 
                     <div class="about-points">
 
                         <div>
-                            <span>✓</span>
-                            <p>Modern & professional design</p>
+                            <strong>01</strong>
+                            <span>Modern Design</span>
                         </div>
 
                         <div>
-                            <span>✓</span>
-                            <p>Mobile responsive websites</p>
+                            <strong>02</strong>
+                            <span>Responsive Development</span>
                         </div>
 
                         <div>
-                            <span>✓</span>
-                            <p>Business-focused structure</p>
+                            <strong>03</strong>
+                            <span>Business Focused</span>
                         </div>
 
                         <div>
-                            <span>✓</span>
-                            <p>Clean and user-friendly experience</p>
+                            <strong>04</strong>
+                            <span>Reliable Support</span>
                         </div>
 
                     </div>
 
                 </div>
 
-            </div>
 
+                <div class="about-visual reveal">
+
+                    <div class="about-card about-card-main">
+                        <span class="about-card-label">BUILD</span>
+                        <strong>Better.</strong>
+                    </div>
+
+                    <div class="about-card about-card-small">
+                        <span>WEB</span>
+                        <strong>2026</strong>
+                    </div>
+
+                    <div class="about-decoration"></div>
+
+                </div>
+
+            </div>
         </section>
 
 
-        <!-- PROCESS -->
+        <!-- ================= PROCESS ================= -->
+
         <section class="section process">
 
             <div class="container">
 
-                <div class="section-heading centered">
-
-                    <span class="section-label">
-                        HOW IT WORKS
-                    </span>
-
-                    <h2>
-                        From idea to
-                        <span>website.</span>
-                    </h2>
-
+                <div class="section-heading centered reveal">
+                    <span class="section-label">HOW IT WORKS</span>
+                    <h2>From idea to <span>launch.</span></h2>
+                    <p>
+                        A simple process designed to keep your project
+                        clear, efficient and stress-free.
+                    </p>
                 </div>
 
 
                 <div class="process-grid">
 
-                    <div class="process-step">
-
-                        <span class="step-number">01</span>
-
-                        <h3>Discuss</h3>
-
+                    <article class="process-card reveal">
+                        <span class="process-number">01</span>
+                        <h3>Discover</h3>
                         <p>
-                            We understand your business, goals and what you
-                            need your website to achieve.
+                            We discuss your business, goals, audience and
+                            what you need your website to achieve.
                         </p>
+                    </article>
 
-                    </div>
-
-
-                    <div class="process-step">
-
-                        <span class="step-number">02</span>
-
+                    <article class="process-card reveal">
+                        <span class="process-number">02</span>
                         <h3>Design</h3>
-
                         <p>
-                            We create a clean visual direction that fits your
-                            brand and target audience.
+                            We create a clean visual direction that fits
+                            your brand and communicates your message.
                         </p>
+                    </article>
 
-                    </div>
-
-
-                    <div class="process-step">
-
-                        <span class="step-number">03</span>
-
+                    <article class="process-card reveal">
+                        <span class="process-number">03</span>
                         <h3>Build</h3>
-
                         <p>
-                            Your website is developed with responsive layouts
-                            for phones, tablets and computers.
+                            Your website is developed with responsive
+                            layouts and modern web technology.
                         </p>
+                    </article>
 
-                    </div>
-
-
-                    <div class="process-step">
-
-                        <span class="step-number">04</span>
-
+                    <article class="process-card reveal">
+                        <span class="process-number">04</span>
                         <h3>Launch</h3>
-
                         <p>
-                            After testing and final adjustments, your website
-                            goes live and is ready for customers.
+                            We test the website, make final adjustments
+                            and get your new online presence live.
                         </p>
-
-                    </div>
+                    </article>
 
                 </div>
 
             </div>
-
         </section>
 
 
-        <!-- PRICING -->
+        <!-- ================= PRICING ================= -->
+
         <section class="section pricing" id="pricing">
 
             <div class="container">
 
-                <div class="section-heading centered">
-
-                    <span class="section-label">
-                        WEBSITE PACKAGES
-                    </span>
-
-                    <h2>
-                        Professional websites.
-                        <span>Fair pricing.</span>
-                    </h2>
-
+                <div class="section-heading centered reveal">
+                    <span class="section-label">PRICING</span>
+                    <h2>Simple packages.<br><span>Clear value.</span></h2>
                     <p>
-                        Simple packages designed to make professional web
-                        development accessible to businesses of different sizes.
+                        Choose a package that fits your current business needs.
                     </p>
-
                 </div>
 
 
                 <div class="pricing-grid">
 
-                    <!-- STARTER -->
-                    <article class="price-card">
 
-                        <span class="price-label">
-                            STARTER
-                        </span>
+                    <article class="pricing-card reveal">
 
-                        <h3>₦75,000</h3>
+                        <span class="pricing-label">STARTER</span>
+
+                        <h3>Starter</h3>
+
+                        <div class="price">
+                            <span>₦</span>75,000
+                        </div>
 
                         <p>
-                            Perfect for individuals, startups and small
-                            businesses getting online.
+                            A professional starting point for individuals
+                            and small businesses.
                         </p>
 
                         <ul>
-
-                            <li>1–3 website pages</li>
-
-                            <li>Mobile responsive design</li>
-
-                            <li>Business information</li>
-
-                            <li>WhatsApp integration</li>
-
-                            <li>Social media links</li>
-
-                            <li>Google Maps integration</li>
-
-                            <li>Website deployment</li>
-
+                            <li>Responsive website</li>
+                            <li>Up to 4 pages</li>
+                            <li>Contact section</li>
+                            <li>Mobile friendly</li>
+                            <li>Basic SEO setup</li>
                         </ul>
 
                         <a href="#contact" class="btn btn-secondary">
@@ -714,42 +606,30 @@
                     </article>
 
 
-                    <!-- BUSINESS -->
-                    <article class="price-card featured">
+                    <article class="pricing-card pricing-featured reveal">
 
-                        <div class="popular">
-                            MOST POPULAR
+                        <div class="popular-badge">MOST POPULAR</div>
+
+                        <span class="pricing-label">BUSINESS</span>
+
+                        <h3>Business</h3>
+
+                        <div class="price">
+                            <span>₦</span>150,000
                         </div>
 
-                        <span class="price-label">
-                            BUSINESS
-                        </span>
-
-                        <h3>₦150,000</h3>
-
                         <p>
-                            For established businesses that want a stronger
-                            online presence.
+                            A complete professional website for growing
+                            businesses and brands.
                         </p>
 
                         <ul>
-
-                            <li>Up to 5 website pages</li>
-
-                            <li>Premium UI design</li>
-
-                            <li>Mobile responsive design</li>
-
-                            <li>WhatsApp integration</li>
-
+                            <li>Responsive website</li>
+                            <li>Up to 8 pages</li>
+                            <li>Custom design</li>
                             <li>Contact form</li>
-
-                            <li>Google Maps integration</li>
-
                             <li>Basic SEO setup</li>
-
-                            <li>Website deployment</li>
-
+                            <li>Social media integration</li>
                         </ul>
 
                         <a href="#contact" class="btn btn-primary">
@@ -759,74 +639,51 @@
                     </article>
 
 
-                    <!-- PROFESSIONAL -->
-                    <article class="price-card">
+                    <article class="pricing-card reveal">
 
-                        <span class="price-label">
-                            PROFESSIONAL
-                        </span>
+                        <span class="pricing-label">PROFESSIONAL</span>
 
-                        <h3>₦250,000</h3>
+                        <h3>Professional</h3>
+
+                        <div class="price">
+                            <span>₦</span>250,000
+                        </div>
 
                         <p>
-                            For growing businesses that need a more advanced
-                            website.
+                            A more advanced digital experience for established
+                            businesses and larger projects.
                         </p>
 
                         <ul>
-
-                            <li>Up to 10 pages</li>
-
-                            <li>Custom UI/UX design</li>
-
-                            <li>Advanced animations</li>
-
-                            <li>Advanced contact features</li>
-
-                            <li>SEO optimization</li>
-
-                            <li>WhatsApp integration</li>
-
-                            <li>Google Maps integration</li>
-
+                            <li>Custom website</li>
+                            <li>Advanced pages</li>
+                            <li>E-commerce functionality</li>
+                            <li>Custom features</li>
+                            <li>SEO setup</li>
                             <li>Priority support</li>
-
                         </ul>
 
                         <a href="#contact" class="btn btn-secondary">
-                            Let's Discuss
+                            Get Started
                         </a>
 
                     </article>
 
                 </div>
 
-
-                <div class="pricing-note">
-
-                    <p>
-                        <strong>Need something different?</strong>
-                        Custom websites and advanced features are available.
-                        Contact us and we'll create a package around your needs.
-                    </p>
-
-                </div>
-
             </div>
-
         </section>
 
 
-        <!-- CTA -->
-        <section class="cta-section">
+        <!-- ================= CTA ================= -->
+
+        <section class="section cta-section">
 
             <div class="container">
 
-                <div class="cta-box">
+                <div class="cta-box reveal">
 
-                    <span class="section-label">
-                        HAVE AN IDEA?
-                    </span>
+                    <span class="section-label">HAVE AN IDEA?</span>
 
                     <h2>
                         Let's build something
@@ -834,64 +691,74 @@
                     </h2>
 
                     <p>
-                        Whether you're starting a new business or upgrading
-                        your current online presence, we're ready to build
-                        with you.
+                        Tell us what you're building and let's turn your
+                        idea into a professional online presence.
                     </p>
 
                     <a href="#contact" class="btn btn-primary">
-                        Start Your Project ↗
+                        Start a Project
+                        <span>↗</span>
                     </a>
 
                 </div>
 
             </div>
-
         </section>
 
 
-        <!-- CONTACT -->
+        <!-- ================= CONTACT ================= -->
+
         <section class="section contact" id="contact">
 
             <div class="container contact-grid">
 
-                <div class="contact-content">
 
-                    <span class="section-label">
-                        CONTACT
-                    </span>
+                <div class="contact-content reveal">
+
+                    <span class="section-label">LET'S TALK</span>
 
                     <h2>
-                        Ready to put your
-                        <span>business online?</span>
+                        Have a project
+                        <span>in mind?</span>
                     </h2>
 
                     <p>
-                        Tell us a little about what you need and let's discuss
-                        how we can build it.
+                        Whether you need a new website, an online store,
+                        a landing page or a redesign, send us a message.
                     </p>
 
 
-                    <div class="contact-details">
+                    <div class="contact-methods">
 
                         <a
                             href="https://wa.me/2348107348296"
                             target="_blank"
                             rel="noopener noreferrer"
+                            class="contact-method"
                         >
-                            <span>WhatsApp</span>
-                            <strong>08107348296</strong>
+                            <span class="contact-icon">◉</span>
+
+                            <div>
+                                <small>WHATSAPP</small>
+                                <strong>Start a conversation</strong>
+                            </div>
+
+                            <span>↗</span>
                         </a>
 
 
-                        <a href="mailto:iagboola10@gmail.com">
+                        <a
+                            href="mailto:iagboola10@gmail.com"
+                            class="contact-method"
+                        >
+                            <span class="contact-icon">✉</span>
 
-                            <span>Email</span>
+                            <div>
+                                <small>EMAIL</small>
+                                <strong>iagboola10@gmail.com</strong>
+                            </div>
 
-                            <strong>
-                                iagboola10@gmail.com
-                            </strong>
-
+                            <span>↗</span>
                         </a>
 
                     </div>
@@ -899,19 +766,20 @@
                 </div>
 
 
-                <form class="contact-form" id="contactForm">
+                <!-- CONTACT FORM -->
+
+                <form class="contact-form reveal" id="contactForm">
 
                     <div class="form-group">
 
-                        <label for="name">
-                            Your Name
-                        </label>
+                        <label for="name">Your Name</label>
 
                         <input
                             type="text"
                             id="name"
                             name="name"
-                            placeholder="Enter your name"
+                            placeholder="John Doe"
+                            autocomplete="name"
                             required
                         >
 
@@ -920,15 +788,14 @@
 
                     <div class="form-group">
 
-                        <label for="business">
-                            Business Name
-                        </label>
+                        <label for="business">Business Name</label>
 
                         <input
                             type="text"
                             id="business"
                             name="business"
-                            placeholder="Your business"
+                            placeholder="Your Business"
+                            autocomplete="organization"
                         >
 
                     </div>
@@ -936,15 +803,14 @@
 
                     <div class="form-group">
 
-                        <label for="email">
-                            Email
-                        </label>
+                        <label for="email">Email Address</label>
 
                         <input
                             type="email"
                             id="email"
                             name="email"
                             placeholder="you@example.com"
+                            autocomplete="email"
                             required
                         >
 
@@ -953,22 +819,24 @@
 
                     <div class="form-group">
 
-                        <label for="service">
-                            What do you need?
-                        </label>
+                        <label for="service">What do you need?</label>
 
-                        <select id="service" name="service">
+                        <select id="service" name="service" required>
+
+                            <option value="" selected disabled>
+                                Select a service
+                            </option>
 
                             <option value="Business Website">
                                 Business Website
                             </option>
 
-                            <option value="E-Commerce Website">
-                                E-Commerce Website
-                            </option>
-
                             <option value="Restaurant Website">
                                 Restaurant Website
+                            </option>
+
+                            <option value="E-Commerce Website">
+                                E-Commerce Website
                             </option>
 
                             <option value="Real Estate Website">
@@ -983,6 +851,10 @@
                                 Website Redesign
                             </option>
 
+                            <option value="Other">
+                                Something Else
+                            </option>
+
                         </select>
 
                     </div>
@@ -990,44 +862,41 @@
 
                     <div class="form-group full-width">
 
-                        <label for="message">
-                            Tell us about your project
-                        </label>
+                        <label for="message">Tell us about your project</label>
 
                         <textarea
                             id="message"
                             name="message"
                             rows="6"
-                            placeholder="Tell us what you have in mind..."
+                            placeholder="Tell us what you would like us to build..."
                             required
                         ></textarea>
 
                     </div>
 
 
-                    <button
-                        type="submit"
-                        class="btn btn-primary form-submit"
-                    >
-                        Send Project Request ↗
-                    </button>
+                    <div class="form-submit">
+
+                        <button type="submit" class="btn btn-primary">
+                            Send Project Request
+                            <span>↗</span>
+                        </button>
+
+                    </div>
 
 
-                    <p
-                        class="form-message"
-                        id="formMessage"
-                    ></p>
+                    <p class="form-message" id="formMessage" aria-live="polite"></p>
 
                 </form>
 
             </div>
-
         </section>
 
     </main>
 
 
-    <!-- FOOTER -->
+    <!-- ================= FOOTER ================= -->
+
     <footer class="footer">
 
         <div class="container">
@@ -1036,30 +905,19 @@
 
                 <a href="#home" class="logo">
 
-                    <span class="logo-main">
-                        PAINSTAKING
-                    </span>
-
-                    <span class="logo-sub">
-                        WEB DEVELOPMENT
-                    </span>
+                    <span class="logo-main">PAINSTAKING</span>
+                    <span class="logo-sub">WEB DEVELOPMENT</span>
 
                 </a>
 
 
-                <p>
-                    Modern websites. Built for business.
-                </p>
-
-
                 <div class="footer-links">
 
+                    <a href="#home">Home</a>
                     <a href="#services">Services</a>
-
                     <a href="#projects">Projects</a>
-
                     <a href="#about">About</a>
-
+                    <a href="#pricing">Pricing</a>
                     <a href="#contact">Contact</a>
 
                 </div>
@@ -1069,13 +927,14 @@
 
             <div class="footer-bottom">
 
-                <span>
-                    © 2026 Painstaking Web Development. All rights reserved.
-                </span>
+                <p>
+                    © <span id="year"></span>
+                    Painstaking Web Development. All rights reserved.
+                </p>
 
-                <span>
-                    Built with purpose.
-                </span>
+                <p>
+                    Modern websites. Built for business.
+                </p>
 
             </div>
 
