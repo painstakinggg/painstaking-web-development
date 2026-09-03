@@ -1,815 +1,1090 @@
-/* =========================================================
-   PAINSTAKING WEB DEVELOPMENT
-   Complete Website Styles
-========================================================= */
-
-:root {
-    --bg: #05070b;
-    --bg-secondary: #080b12;
-    --card: #0d111a;
-    --card-hover: #111827;
-
-    --blue: #1683ff;
-    --blue-light: #55aaff;
-    --blue-dark: #075dcc;
-
-    --white: #ffffff;
-    --text: #eef4ff;
-    --muted: #9ba8bb;
-    --muted-dark: #68758a;
-
-    --border: #1b2636;
-    --border-light: #26364c;
-
-    --container: 1180px;
-    --radius: 18px;
-    --transition: 0.3s ease;
-}
-
-
-/* =========================================================
-   RESET
-========================================================= */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 90px;
-}
-
-body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: Arial, Helvetica, sans-serif;
-    line-height: 1.6;
-    overflow-x: hidden;
-}
-
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
-button,
-input,
-select,
-textarea {
-    font: inherit;
-}
-
-button {
-    cursor: pointer;
-}
-
-img {
-    max-width: 100%;
-    display: block;
-}
-
-.container {
-    width: min(92%, var(--container));
-    margin: 0 auto;
-}
-
-
-/* =========================================================
-   NAVBAR + LOGO
-========================================================= */
-
-.navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-
-    background: rgba(5, 7, 11, 0.86);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    transition: var(--transition);
-}
-
-.nav-container {
-    min-height: 68px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 25px;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;
-    background: transparent;
-}
-
-.logo img {
-    width: 105px;
-    height: auto;
-    max-height: 42px;
-    object-fit: contain;
-    background: transparent;
-    border: none;
-    box-shadow: none;
-}
-
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
-
-.nav-links {
-    display: flex;
-    align-items: center;
-    gap: 28px;
-    list-style: none;
-}
-
-.nav-links a {
-    color: var(--muted);
-    font-size: 0.92rem;
-    font-weight: 600;
-    position: relative;
-    transition: var(--transition);
-}
-
-.nav-links a:hover,
-.nav-links a.current {
-    color: var(--white);
-}
-
-.nav-links a::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -8px;
-    width: 0;
-    height: 2px;
-    background: var(--blue);
-    transition: var(--transition);
-}
-
-.nav-links a:hover::after,
-.nav-links a.current::after {
-    width: 100%;
-}
-
-
-/* =========================================================
-   MOBILE MENU
-========================================================= */
-
-.menu-toggle {
-    display: none;
-
-    width: 42px;
-    height: 42px;
-
-    border: 1px solid var(--border);
-    border-radius: 10px;
-
-    background: var(--card);
-    color: var(--white);
-
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 5px;
-}
-
-.menu-toggle span {
-    width: 20px;
-    height: 2px;
-    background: var(--white);
-    border-radius: 5px;
-}
-
-
-/* =========================================================
-   HERO
-========================================================= */
-
-.hero {
-    min-height: 100vh;
-    padding: 150px 0 90px;
-
-    position: relative;
-    overflow: hidden;
-
-    background:
-        radial-gradient(
-            circle at 75% 35%,
-            rgba(22, 131, 255, 0.15),
-            transparent 35%
-        ),
-        radial-gradient(
-            circle at 20% 80%,
-            rgba(7, 93, 204, 0.08),
-            transparent 30%
-        ),
-        var(--bg);
-}
-
-.hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-
-    background-image:
-        linear-gradient(
-            rgba(255,255,255,0.025) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            90deg,
-            rgba(255,255,255,0.025) 1px,
-            transparent 1px
-        );
-
-    background-size: 55px 55px;
-    pointer-events: none;
-}
-
-.hero-container {
-    min-height: calc(100vh - 240px);
-
-    display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    align-items: center;
-    gap: 70px;
-
-    position: relative;
-    z-index: 1;
-}
-
-.hero-content {
-    max-width: 700px;
-}
-
-.hero-tag,
-.section-heading > span,
-.section-label,
-.about-small,
-.project-info > span,
-.price-card > span {
-    color: var(--blue-light);
-    font-size: 0.76rem;
-    font-weight: 800;
-    letter-spacing: 2px;
-}
-
-.hero h1 {
-    margin: 18px 0 25px;
-
-    font-size: clamp(3rem, 7vw, 5.8rem);
-    line-height: 0.98;
-    letter-spacing: -4px;
-    font-weight: 800;
-}
-
-.hero h1 span,
-.section-heading h2 span,
-.about-content h2 span,
-.contact-content h2 span {
-    display: block;
-    color: var(--blue);
-}
-
-.hero p {
-    max-width: 290px;
-
-    color: var(--muted);
-    font-size: 1.08rem;
-    line-height: 1.8;
-}
-
-.hero-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 14px;
-    margin-top: 34px;
-}
-
-
-/* =========================================================
-   BUTTONS
-========================================================= */
-
-.btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    min-height: 50px;
-    padding: 0 24px;
-
-    border-radius: 12px;
-
-    font-size: 0.92rem;
-    font-weight: 700;
-
-    transition: var(--transition);
-}
-
-.btn-primary {
-    background: var(--blue);
-    color: var(--white);
-    box-shadow: 0 12px 30px rgba(22, 131, 255, 0.2);
-}
-
-.btn-primary:hover {
-    background: var(--blue-light);
-    transform: translateY(-2px);
-}
-
-.btn-secondary {
-    background: transparent;
-    border: 1px solid var(--border-light);
-    color: var(--white);
-}
-
-.btn-secondary:hover {
-    border-color: var(--blue);
-    color: var(--blue-light);
-    transform: translateY(-2px);
-}
-
-
-/* =========================================================
-   HERO STATS
-========================================================= */
-
-.hero-stats {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 45px;
-    margin-top: 55px;
-}
-
-.hero-stats div {
-    display: flex;
-    flex-direction: column;
-}
-
-.hero-stats strong {
-    font-size: 1.8rem;
-    color: var(--white);
-}
-
-.hero-stats span {
-    color: var(--muted-dark);
-    font-size: 0.8rem;
-    margin-top: 3px;
-}
-
-
-/* =========================================================
-   HERO VISUAL
-========================================================= */
-
-.hero-visual {
-    display: flex;
-    justify-content: center;
-}
-
-.hero-card {
-    width: min(100%, 450px);
-
-    padding: 14px;
-
-    border: 1px solid var(--border);
-    border-radius: 22px;
-
-    background: rgba(13, 17, 26, 0.85);
-
-    box-shadow:
-        0 30px 80px rgba(0, 0, 0, 0.45),
-        0 0 80px rgba(22, 131, 255, 0.08);
-
-    transform: rotate(2deg);
-}
-
-.hero-card-top {
-    display: flex;
-    gap: 7px;
-
-    padding: 6px 4px 14px;
-}
-
-.hero-card-top span {
-    width: 9px;
-    height: 9px;
-
-    border-radius: 50%;
-    background: var(--muted-dark);
-}
-
-.hero-code {
-    min-height: 350px;
-
-    padding: 45px 35px;
-
-    border-radius: 14px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #0c1420,
-            #080b12
-        );
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.hero-code span {
-    color: var(--muted-dark);
-    font-family: monospace;
-    font-size: 0.9rem;
-}
-
-.hero-code strong {
-    margin: 18px 0 12px;
-
-    color: var(--white);
-    font-size: 2.2rem;
-}
-
-.hero-code em {
-    margin-top: 25px;
-
-    color: var(--blue);
-    font-family: monospace;
-    font-style: normal;
-}
-
-
-/* =========================================================
-   GENERAL SECTIONS
-========================================================= */
-
-.section {
-    padding: 110px 0;
-    background: var(--bg);
-}
-
-.section:nth-of-type(even) {
-    background: var(--bg-secondary);
-}
-
-.section-heading {
-    max-width: 700px;
-    margin-bottom: 55px;
-}
-
-.section-heading h2 {
-    margin: 14px 0 18px;
-
-    font-size: clamp(2.2rem, 5vw, 4rem);
-    line-height: 1.05;
-    letter-spacing: -2px;
-}
-
-.section-heading p {
-    color: var(--muted);
-    line-height: 1.8;
-}
-
-
-/* =========================================================
-   SERVICES
-========================================================= */
-
-.services-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
-}
-
-.service-card {
-    min-height: 260px;
-
-    padding: 30px;
-
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-
-    background: var(--card);
-
-    transition: var(--transition);
-}
-
-.service-card:hover {
-    transform: translateY(-7px);
-    border-color: rgba(22, 131, 255, 0.45);
-    background: var(--card-hover);
-}
-
-.service-number {
-    color: var(--blue);
-    font-size: 0.8rem;
-    font-weight: 800;
-    letter-spacing: 1px;
-}
-
-.service-card h3 {
-    margin: 25px 0 12px;
-    font-size: 1.25rem;
-}
-
-.service-card p {
-    color: var(--muted);
-    font-size: 0.92rem;
-    line-height: 1.75;
-}
-
-
-/* =========================================================
-   PROJECTS
-========================================================= */
-
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-}
-
-.project-card {
-    overflow: hidden;
-
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-
-    background: var(--card);
-
-    transition: var(--transition);
-}
-
-.project-card:hover {
-    transform: translateY(-6px);
-    border-color: rgba(22, 131, 255, 0.4);
-}
-
-.project-image {
-    min-height: 240px;
-
-    padding: 20px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(22, 131, 255, 0.16),
-            transparent 60%
-        ),
-        #080d15;
-}
-
-.project-preview {
-    width: 85%;
-    min-height: 150px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border: 1px solid var(--border-light);
-    border-radius: 12px;
-
-    color: var(--blue-light);
-
-    font-size: 0.9rem;
-    font-weight: 800;
-    letter-spacing: 2px;
-
-    background: rgba(5, 7, 11, 0.8);
-}
-
-.project-info {
-    padding: 28px;
-}
-
-.project-info h3 {
-    margin: 10px 0;
-
-    font-size: 1.4rem;
-}
-
-.project-info p {
-    color: var(--muted);
-    font-size: 0.9rem;
-    line-height: 1.7;
-}
-
-.project-info a {
-    display: inline-block;
-
-    margin-top: 18px;
-
-    color: var(--blue-light);
-    font-size: 0.9rem;
-    font-weight: 700;
-}
-
-.project-info a:hover {
-    color: var(--white);
-}
-
-
-/* =========================================================
-   ABOUT
-========================================================= */
-
-.about-container {
-    display: grid;
-    grid-template-columns: 0.8fr 1.2fr;
-    gap: 80px;
-    align-items: center;
-}
-
-.about-card {
-    min-height: 430px;
-
-    padding: 45px;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-    border: 1px solid var(--border);
-    border-radius: 24px;
-
-    background:
-        radial-gradient(
-            circle at 80% 20%,
-            rgba(22, 131, 255, 0.15),
-            transparent 40%
-        ),
-        var(--card);
-}
-
-.about-card strong {
-    font-size: clamp(2.8rem, 5vw, 5rem);
-    line-height: 0.9;
-    letter-spacing: -3px;
-}
-
-.about-content h2 {
-    margin: 14px 0 25px;
-
-    font-size: clamp(2.2rem, 5vw, 4rem);
-    line-height: 1.05;
-    letter-spacing: -2px;
-}
-
-.about-content p {
-    margin-bottom: 18px;
-
-    color: var(--muted);
-    line-height: 1.8;
-}
-
-.text-link {
-    display: inline-block;
-
-    margin-top: 12px;
-
-    color: var(--blue-light);
-    font-weight: 700;
-}
-
-
-/* =========================================================
-   PROCESS
-========================================================= */
-
-.process-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 18px;
-}
-
-.process-step {
-    padding: 30px;
-
-    border-top: 1px solid var(--border);
-
-    transition: var(--transition);
-}
-
-.process-step:hover {
-    border-color: var(--blue);
-}
-
-.process-step strong {
-    color: var(--blue);
-    font-size: 0.8rem;
-}
-
-.process-step h3 {
-    margin: 18px 0 10px;
-    font-size: 1.2rem;
-}
-
-.process-step p {
-    color: var(--muted);
-    font-size: 0.9rem;
-    line-height: 1.7;
-}
-
-
-/* =========================================================
-   PRICING
-========================================================= */
-
-.pricing-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-}
-
-.price-card {
-    padding: 35px;
-
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-
-    background: var(--card);
-
-    transition: var(--transition);
-}
-
-.price-card:hover {
-    transform: translateY(-5px);
-}
-
-.price-card.featured {
-    border-color: var(--blue);
-    box-shadow: 0 20px 50px rgba(22, 131, 255, 0.1);
-}
-
-.price-card h3 {
-    margin: 15px 0;
-
-    font-size: 2.5rem;
-}
-
-.price-card p {
-    color: var(--muted);
-    line-height: 1.7;
-}
-
-.price-card ul {
-    list-style: none;
-    margin: 25px 0;
-}
-
-.price-card li {
-    padding: 9px 0;
-
-    color: var(--text);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-
-    font-size: 0.9rem;
-}
-
-.price-card li::before {
-    content: "✓";
-    margin-right: 10px;
-    color: var(--blue);
-}
-
-.price-card .btn {
-    width: 100%;
-}
-
-
-/* =========================================================
-   CONTACT
-========================================================= */
-
-.contact {
-    background:
-        radial-gradient(
-            circle at 20% 50%,
-            rgba(22, 131, 255, 0.08),
-            transparent 35%
-        ),
-        var(--bg-secondary);
-}
-
-.contact-container {
-    display: grid;
-   
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Painstaking Web Development | Modern Websites. Built for Business.</title>
+
+    <meta name="description" content="Painstaking Web Development creates modern, responsive websites for businesses, restaurants, real estate companies, online stores and more.">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+    <header class="navbar">
+        <div class="container nav-container">
+
+            <a href="#home" class="logo">
+                <span class="logo-main">PAINSTAKING</span>
+                <span class="logo-sub">WEB DEVELOPMENT</span>
+            </a>
+
+            <button class="menu-toggle" aria-label="Open navigation menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <nav class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#services">Services</a>
+                <a href="#projects">Projects</a>
+                <a href="#about">About</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#contact" class="nav-button">Let's Talk</a>
+            </nav>
+
+        </div>
+    </header>
+
+
+    <main>
+
+        <!-- HERO -->
+        <section class="hero" id="home">
+
+            <div class="container hero-container">
+
+                <div class="hero-content">
+
+                    <div class="hero-badge">
+                        <span></span>
+                        WEB DEVELOPMENT
+                    </div>
+
+                    <h1>
+                        Modern websites.
+                        <span>Built for business.</span>
+                    </h1>
+
+                    <p class="hero-text">
+                        We create clean, modern and responsive websites
+                        designed to give businesses a professional presence
+                        online.
+                    </p>
+
+                    <div class="hero-buttons">
+
+                        <a href="#projects" class="btn btn-primary">
+                            View Our Work
+                        </a>
+
+                        <a href="#contact" class="btn btn-secondary">
+                            Start a Project
+                        </a>
+
+                    </div>
+
+                    <div class="hero-stats">
+
+                        <div class="stat">
+                            <strong>03+</strong>
+                            <span>Live Projects</span>
+                        </div>
+
+                        <div class="stat">
+                            <strong>100%</strong>
+                            <span>Responsive</span>
+                        </div>
+
+                        <div class="stat">
+                            <strong>24/7</strong>
+                            <span>Online Presence</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="hero-visual">
+
+                    <div class="visual-glow"></div>
+
+                    <div class="code-window">
+
+                        <div class="window-bar">
+
+                            <div class="window-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+
+                            <span>website.html</span>
+
+                        </div>
+
+                        <div class="code-content">
+
+                            <div>
+                                <span class="code-purple">&lt;website&gt;</span>
+                            </div>
+
+                            <div class="indent">
+                                <span class="code-gray">&lt;business&gt;</span>
+                            </div>
+
+                            <div class="indent double">
+                                <span class="code-white">Your business.</span>
+                            </div>
+
+                            <div class="indent">
+                                <span class="code-gray">&lt;/business&gt;</span>
+                            </div>
+
+                            <div>
+                                <span class="code-purple">&lt;/website&gt;</span>
+                            </div>
+
+                            <div class="code-cursor"></div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SERVICES -->
+        <section class="section services" id="services">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-label">WHAT WE DO</span>
+
+                    <h2>
+                        Websites designed around
+                        <span>your business.</span>
+                    </h2>
+
+                    <p>
+                        From simple business websites to complete online
+                        storefronts, we build digital experiences that help
+                        businesses look professional online.
+                    </p>
+
+                </div>
+
+
+                <div class="services-grid">
+
+                    <article class="service-card">
+
+                        <div class="service-number">01</div>
+
+                        <div class="service-icon">⌘</div>
+
+                        <h3>Business Websites</h3>
+
+                        <p>
+                            Professional websites that clearly present your
+                            business, services and brand to potential customers.
+                        </p>
+
+                    </article>
+
+
+                    <article class="service-card">
+
+                        <div class="service-number">02</div>
+
+                        <div class="service-icon">◈</div>
+
+                        <h3>Restaurant Websites</h3>
+
+                        <p>
+                            Attractive restaurant websites for menus,
+                            locations, reservations and customer discovery.
+                        </p>
+
+                    </article>
+
+
+                    <article class="service-card">
+
+                        <div class="service-number">03</div>
+
+                        <div class="service-icon">▦</div>
+
+                        <h3>E-Commerce Websites</h3>
+
+                        <p>
+                            Modern storefront experiences designed to showcase
+                            products and make online shopping easier.
+                        </p>
+
+                    </article>
+
+
+                    <article class="service-card">
+
+                        <div class="service-number">04</div>
+
+                        <div class="service-icon">⌂</div>
+
+                        <h3>Real Estate Websites</h3>
+
+                        <p>
+                            Property-focused websites that showcase listings,
+                            locations and important property information.
+                        </p>
+
+                    </article>
+
+
+                    <article class="service-card">
+
+                        <div class="service-number">05</div>
+
+                        <div class="service-icon">↗</div>
+
+                        <h3>Landing Pages</h3>
+
+                        <p>
+                            Focused landing pages built to promote a product,
+                            service, campaign or business offer.
+                        </p>
+
+                    </article>
+
+
+                    <article class="service-card">
+
+                        <div class="service-number">06</div>
+
+                        <div class="service-icon">↻</div>
+
+                        <h3>Website Redesign</h3>
+
+                        <p>
+                            Transform an outdated website into a cleaner,
+                            modern and mobile-friendly experience.
+                        </p>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- PROJECTS -->
+        <section class="section projects" id="projects">
+
+            <div class="container">
+
+                <div class="section-heading projects-heading">
+
+                    <div>
+
+                        <span class="section-label">SELECTED WORK</span>
+
+                        <h2>
+                            Projects we've
+                            <span>built.</span>
+                        </h2>
+
+                    </div>
+
+                    <p>
+                        Explore some of our website concepts and deployed
+                        projects across different industries.
+                    </p>
+
+                </div>
+
+
+                <div class="projects-grid">
+
+                    <!-- EMBER & OLIVE -->
+                    <article class="project-card">
+
+                        <div class="project-preview restaurant-preview">
+
+                            <div class="preview-content">
+                                <span>EMBER & OLIVE</span>
+                                <small>RESTAURANT</small>
+                            </div>
+
+                        </div>
+
+                        <div class="project-info">
+
+                            <div>
+
+                                <span class="project-category">
+                                    Restaurant
+                                </span>
+
+                                <h3>Ember & Olive</h3>
+
+                                <p>
+                                    A modern restaurant website designed to
+                                    showcase food, atmosphere and services.
+                                </p>
+
+                            </div>
+
+                            <a
+                                href="https://painstakinggg.github.io/ember-olive-restaurant/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="project-link"
+                            >
+                                View Website ↗
+                            </a>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- URBAN THREAD -->
+                    <article class="project-card">
+
+                        <div class="project-preview fashion-preview">
+
+                            <div class="preview-content">
+                                <span>URBAN THREAD</span>
+                                <small>FASHION STORE</small>
+                            </div>
+
+                        </div>
+
+                        <div class="project-info">
+
+                            <div>
+
+                                <span class="project-category">
+                                    E-Commerce
+                                </span>
+
+                                <h3>Urban Thread</h3>
+
+                                <p>
+                                    A modern fashion storefront concept with
+                                    a clean shopping-focused interface.
+                                </p>
+
+                            </div>
+
+                            <a
+                                href="https://painstakinggg.github.io/urban-thread-store/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="project-link"
+                            >
+                                View Website ↗
+                            </a>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- HAVENSTONE -->
+                    <article class="project-card">
+
+                        <div class="project-preview property-preview">
+
+                            <div class="preview-content">
+                                <span>HAVENSTONE</span>
+                                <small>PROPERTIES</small>
+                            </div>
+
+                        </div>
+
+                        <div class="project-info">
+
+                            <div>
+
+                                <span class="project-category">
+                                    Real Estate
+                                </span>
+
+                                <h3>Havenstone Properties</h3>
+
+                                <p>
+                                    A property showcase website created for a
+                                    modern real estate brand.
+                                </p>
+
+                            </div>
+
+                            <a
+                                href="https://painstakinggg.github.io/havenstone-properties/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="project-link"
+                            >
+                                View Website ↗
+                            </a>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- NEXT PROJECT -->
+                    <article class="project-card coming-project">
+
+                        <div class="project-preview future-preview">
+
+                            <div class="preview-content">
+                                <span>YOUR BUSINESS</span>
+                                <small>NEXT PROJECT</small>
+                            </div>
+
+                        </div>
+
+                        <div class="project-info">
+
+                            <div>
+
+                                <span class="project-category">
+                                    Coming Soon
+                                </span>
+
+                                <h3>Your Business Could Be Next</h3>
+
+                                <p>
+                                    Have a business that needs a professional
+                                    website? Let's build it together.
+                                </p>
+
+                            </div>
+
+                            <a href="#contact" class="project-link">
+                                Start a Project ↗
+                            </a>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ABOUT -->
+        <section class="section about" id="about">
+
+            <div class="container about-grid">
+
+                <div class="about-visual">
+
+                    <div class="about-card">
+
+                        <span class="about-small">
+                            PAINSTAKING
+                        </span>
+
+                        <strong>
+                            WEB
+                            <br>
+                            DEVELOPMENT
+                        </strong>
+
+                        <div class="about-line"></div>
+
+                        <span class="about-year">
+                            EST. 2026
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="about-content">
+
+                    <span class="section-label">
+                        ABOUT PAINSTAKING
+                    </span>
+
+                    <h2>
+                        Your business deserves a
+                        <span>better online presence.</span>
+                    </h2>
+
+                    <p>
+                        Painstaking Web Development helps businesses create
+                        modern websites that make a strong first impression
+                        online.
+                    </p>
+
+                    <p>
+                        We focus on clean design, responsive layouts,
+                        straightforward user experiences and websites that
+                        represent each business professionally.
+                    </p>
+
+
+                    <div class="about-points">
+
+                        <div>
+                            <span>✓</span>
+                            <p>Modern & professional design</p>
+                        </div>
+
+                        <div>
+                            <span>✓</span>
+                            <p>Mobile responsive websites</p>
+                        </div>
+
+                        <div>
+                            <span>✓</span>
+                            <p>Business-focused structure</p>
+                        </div>
+
+                        <div>
+                            <span>✓</span>
+                            <p>Clean and user-friendly experience</p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- PROCESS -->
+        <section class="section process">
+
+            <div class="container">
+
+                <div class="section-heading centered">
+
+                    <span class="section-label">
+                        HOW IT WORKS
+                    </span>
+
+                    <h2>
+                        From idea to
+                        <span>website.</span>
+                    </h2>
+
+                </div>
+
+
+                <div class="process-grid">
+
+                    <div class="process-step">
+
+                        <span class="step-number">01</span>
+
+                        <h3>Discuss</h3>
+
+                        <p>
+                            We understand your business, goals and what you
+                            need your website to achieve.
+                        </p>
+
+                    </div>
+
+
+                    <div class="process-step">
+
+                        <span class="step-number">02</span>
+
+                        <h3>Design</h3>
+
+                        <p>
+                            We create a clean visual direction that fits your
+                            brand and target audience.
+                        </p>
+
+                    </div>
+
+
+                    <div class="process-step">
+
+                        <span class="step-number">03</span>
+
+                        <h3>Build</h3>
+
+                        <p>
+                            Your website is developed with responsive layouts
+                            for phones, tablets and computers.
+                        </p>
+
+                    </div>
+
+
+                    <div class="process-step">
+
+                        <span class="step-number">04</span>
+
+                        <h3>Launch</h3>
+
+                        <p>
+                            After testing and final adjustments, your website
+                            goes live and is ready for customers.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- PRICING -->
+        <section class="section pricing" id="pricing">
+
+            <div class="container">
+
+                <div class="section-heading centered">
+
+                    <span class="section-label">
+                        WEBSITE PACKAGES
+                    </span>
+
+                    <h2>
+                        Professional websites.
+                        <span>Fair pricing.</span>
+                    </h2>
+
+                    <p>
+                        Simple packages designed to make professional web
+                        development accessible to businesses of different sizes.
+                    </p>
+
+                </div>
+
+
+                <div class="pricing-grid">
+
+                    <!-- STARTER -->
+                    <article class="price-card">
+
+                        <span class="price-label">
+                            STARTER
+                        </span>
+
+                        <h3>₦75,000</h3>
+
+                        <p>
+                            Perfect for individuals, startups and small
+                            businesses getting online.
+                        </p>
+
+                        <ul>
+
+                            <li>1–3 website pages</li>
+
+                            <li>Mobile responsive design</li>
+
+                            <li>Business information</li>
+
+                            <li>WhatsApp integration</li>
+
+                            <li>Social media links</li>
+
+                            <li>Google Maps integration</li>
+
+                            <li>Website deployment</li>
+
+                        </ul>
+
+                        <a href="#contact" class="btn btn-secondary">
+                            Get Started
+                        </a>
+
+                    </article>
+
+
+                    <!-- BUSINESS -->
+                    <article class="price-card featured">
+
+                        <div class="popular">
+                            MOST POPULAR
+                        </div>
+
+                        <span class="price-label">
+                            BUSINESS
+                        </span>
+
+                        <h3>₦150,000</h3>
+
+                        <p>
+                            For established businesses that want a stronger
+                            online presence.
+                        </p>
+
+                        <ul>
+
+                            <li>Up to 5 website pages</li>
+
+                            <li>Premium UI design</li>
+
+                            <li>Mobile responsive design</li>
+
+                            <li>WhatsApp integration</li>
+
+                            <li>Contact form</li>
+
+                            <li>Google Maps integration</li>
+
+                            <li>Basic SEO setup</li>
+
+                            <li>Website deployment</li>
+
+                        </ul>
+
+                        <a href="#contact" class="btn btn-primary">
+                            Get Started
+                        </a>
+
+                    </article>
+
+
+                    <!-- PROFESSIONAL -->
+                    <article class="price-card">
+
+                        <span class="price-label">
+                            PROFESSIONAL
+                        </span>
+
+                        <h3>₦250,000</h3>
+
+                        <p>
+                            For growing businesses that need a more advanced
+                            website.
+                        </p>
+
+                        <ul>
+
+                            <li>Up to 10 pages</li>
+
+                            <li>Custom UI/UX design</li>
+
+                            <li>Advanced animations</li>
+
+                            <li>Advanced contact features</li>
+
+                            <li>SEO optimization</li>
+
+                            <li>WhatsApp integration</li>
+
+                            <li>Google Maps integration</li>
+
+                            <li>Priority support</li>
+
+                        </ul>
+
+                        <a href="#contact" class="btn btn-secondary">
+                            Let's Discuss
+                        </a>
+
+                    </article>
+
+                </div>
+
+
+                <div class="pricing-note">
+
+                    <p>
+                        <strong>Need something different?</strong>
+                        Custom websites and advanced features are available.
+                        Contact us and we'll create a package around your needs.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CTA -->
+        <section class="cta-section">
+
+            <div class="container">
+
+                <div class="cta-box">
+
+                    <span class="section-label">
+                        HAVE AN IDEA?
+                    </span>
+
+                    <h2>
+                        Let's build something
+                        <span>worth showing off.</span>
+                    </h2>
+
+                    <p>
+                        Whether you're starting a new business or upgrading
+                        your current online presence, we're ready to build
+                        with you.
+                    </p>
+
+                    <a href="#contact" class="btn btn-primary">
+                        Start Your Project ↗
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CONTACT -->
+        <section class="section contact" id="contact">
+
+            <div class="container contact-grid">
+
+                <div class="contact-content">
+
+                    <span class="section-label">
+                        CONTACT
+                    </span>
+
+                    <h2>
+                        Ready to put your
+                        <span>business online?</span>
+                    </h2>
+
+                    <p>
+                        Tell us a little about what you need and let's discuss
+                        how we can build it.
+                    </p>
+
+
+                    <div class="contact-details">
+
+                        <a
+                            href="https://wa.me/2348107348296"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <span>WhatsApp</span>
+                            <strong>08107348296</strong>
+                        </a>
+
+
+                        <a href="mailto:iagboola10@gmail.com">
+
+                            <span>Email</span>
+
+                            <strong>
+                                iagboola10@gmail.com
+                            </strong>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <form class="contact-form" id="contactForm">
+
+                    <div class="form-group">
+
+                        <label for="name">
+                            Your Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            placeholder="Enter your name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="business">
+                            Business Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="business"
+                            name="business"
+                            placeholder="Your business"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="you@example.com"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="service">
+                            What do you need?
+                        </label>
+
+                        <select id="service" name="service">
+
+                            <option value="Business Website">
+                                Business Website
+                            </option>
+
+                            <option value="E-Commerce Website">
+                                E-Commerce Website
+                            </option>
+
+                            <option value="Restaurant Website">
+                                Restaurant Website
+                            </option>
+
+                            <option value="Real Estate Website">
+                                Real Estate Website
+                            </option>
+
+                            <option value="Landing Page">
+                                Landing Page
+                            </option>
+
+                            <option value="Website Redesign">
+                                Website Redesign
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group full-width">
+
+                        <label for="message">
+                            Tell us about your project
+                        </label>
+
+                        <textarea
+                            id="message"
+                            name="message"
+                            rows="6"
+                            placeholder="Tell us what you have in mind..."
+                            required
+                        ></textarea>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary form-submit"
+                    >
+                        Send Project Request ↗
+                    </button>
+
+
+                    <p
+                        class="form-message"
+                        id="formMessage"
+                    ></p>
+
+                </form>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer class="footer">
+
+        <div class="container">
+
+            <div class="footer-top">
+
+                <a href="#home" class="logo">
+
+                    <span class="logo-main">
+                        PAINSTAKING
+                    </span>
+
+                    <span class="logo-sub">
+                        WEB DEVELOPMENT
+                    </span>
+
+                </a>
+
+
+                <p>
+                    Modern websites. Built for business.
+                </p>
+
+
+                <div class="footer-links">
+
+                    <a href="#services">Services</a>
+
+                    <a href="#projects">Projects</a>
+
+                    <a href="#about">About</a>
+
+                    <a href="#contact">Contact</a>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-bottom">
+
+                <span>
+                    © 2026 Painstaking Web Development. All rights reserved.
+                </span>
+
+                <span>
+                    Built with purpose.
+                </span>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
