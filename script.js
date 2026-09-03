@@ -14,7 +14,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (menuToggle && navLinks) {
 
-        menuToggle.addEventListener("click", () => {
+        menuToggle.addEventListener("click", (event) => {
+
+            event.stopPropagation();
 
             navLinks.classList.toggle("active");
 
@@ -23,7 +25,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
             menuToggle.setAttribute(
                 "aria-expanded",
+                String(isOpen)
+            );
+
+            menuToggle.setAttribute(
+                "aria-label",
                 isOpen
+                    ? "Close navigation menu"
+                    : "Open navigation menu"
             );
 
         });
@@ -40,6 +49,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     "false"
                 );
 
+                menuToggle.setAttribute(
+                    "aria-label",
+                    "Open navigation menu"
+                );
+
             });
 
         });
@@ -48,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       CLOSE MENU WHEN CLICKING OUTSIDE
+       CLOSE MOBILE MENU OUTSIDE
     ===================================================== */
 
     document.addEventListener("click", event => {
@@ -57,16 +71,10 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        const clickedInsideMenu =
-            navLinks.contains(event.target);
-
-        const clickedToggle =
-            menuToggle.contains(event.target);
-
         if (
             navLinks.classList.contains("active") &&
-            !clickedInsideMenu &&
-            !clickedToggle
+            !navLinks.contains(event.target) &&
+            !menuToggle.contains(event.target)
         ) {
 
             navLinks.classList.remove("active");
@@ -74,6 +82,11 @@ document.addEventListener("DOMContentLoaded", () => {
             menuToggle.setAttribute(
                 "aria-expanded",
                 "false"
+            );
+
+            menuToggle.setAttribute(
+                "aria-label",
+                "Open navigation menu"
             );
 
         }
@@ -86,8 +99,16 @@ document.addEventListener("DOMContentLoaded", () => {
     ===================================================== */
 
     const revealElements = document.querySelectorAll(
-        ".service-card, .project-card, .about-card, .process-step, .price-card, .contact-form"
+        ".service-card, " +
+        ".project-card, " +
+        ".about-card, " +
+        ".about-content, " +
+        ".process-step, " +
+        ".price-card, " +
+        ".contact-form, " +
+        ".contact-content"
     );
+
 
     revealElements.forEach(element => {
         element.classList.add("reveal");
@@ -186,30 +207,30 @@ document.addEventListener("DOMContentLoaded", () => {
                 const name =
                     document
                         .getElementById("name")
-                        .value
+                        ?.value
                         .trim();
 
                 const business =
                     document
                         .getElementById("business")
-                        .value
+                        ?.value
                         .trim();
 
                 const email =
                     document
                         .getElementById("email")
-                        .value
+                        ?.value
                         .trim();
 
                 const service =
                     document
                         .getElementById("service")
-                        .value;
+                        ?.value;
 
                 const message =
                     document
                         .getElementById("message")
-                        .value
+                        ?.value
                         .trim();
 
 
@@ -224,13 +245,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
 
 
-                /*
-                    Correct Painstaking WhatsApp number:
-                    08107348296
-
-                    International format:
-                    2348107348296
-                */
+                /* WhatsApp number */
 
                 const whatsappNumber =
                     "2348107348296";
@@ -242,7 +257,7 @@ document.addEventListener("DOMContentLoaded", () => {
 Name: ${name}
 Business: ${business || "Not provided"}
 Email: ${email}
-Service: ${service}
+Service: ${service || "Not specified"}
 
 Project Details:
 ${message}`;
@@ -264,7 +279,8 @@ ${message}`;
 
                     window.open(
                         whatsappURL,
-                        "_blank"
+                        "_blank",
+                        "noopener,noreferrer"
                     );
 
                 }, 500);
@@ -283,31 +299,44 @@ ${message}`;
         document.querySelector(".navbar");
 
 
-    if (navbar) {
+    const updateNavbar =
+        () => {
 
-        window.addEventListener(
-            "scroll",
-            () => {
-
-                if (window.scrollY > 30) {
-
-                    navbar.style.background =
-                        "rgba(8, 8, 13, 0.95)";
-
-                } else {
-
-                    navbar.style.background =
-                        "rgba(8, 8, 13, 0.82)";
-
-                }
-
-            },
-            {
-                passive: true
+            if (!navbar) {
+                return;
             }
-        );
 
-    }
+            if (window.scrollY > 30) {
+
+                navbar.style.background =
+                    "rgba(5, 7, 11, 0.96)";
+
+                navbar.style.boxShadow =
+                    "0 10px 35px rgba(0, 0, 0, 0.25)";
+
+            } else {
+
+                navbar.style.background =
+                    "rgba(5, 7, 11, 0.86)";
+
+                navbar.style.boxShadow =
+                    "none";
+
+            }
+
+        };
+
+
+    updateNavbar();
+
+
+    window.addEventListener(
+        "scroll",
+        updateNavbar,
+        {
+            passive: true
+        }
+    );
 
 
     /* =====================================================
@@ -325,7 +354,11 @@ ${message}`;
         );
 
 
-    if ("IntersectionObserver" in window) {
+    if (
+        "IntersectionObserver" in window &&
+        sections.length &&
+        navigationLinks.length
+    ) {
 
         const sectionObserver =
             new IntersectionObserver(
@@ -337,9 +370,11 @@ ${message}`;
 
                             navigationLinks.forEach(
                                 link => {
+
                                     link.classList.remove(
                                         "current"
                                     );
+
                                 }
                             );
 
@@ -442,13 +477,47 @@ ${message}`;
 
 
                 setTimeout(() => {
+
                     ripple.remove();
+
                 }, 500);
 
             }
         );
 
     });
+
+
+    /* =====================================================
+       ESCAPE KEY — CLOSE MOBILE MENU
+    ===================================================== */
+
+    document.addEventListener(
+        "keydown",
+        event => {
+
+            if (
+                event.key === "Escape" &&
+                navLinks &&
+                menuToggle
+            ) {
+
+                navLinks.classList.remove("active");
+
+                menuToggle.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+                menuToggle.setAttribute(
+                    "aria-label",
+                    "Open navigation menu"
+                );
+
+            }
+
+        }
+    );
 
 
     /* =====================================================
@@ -467,5 +536,20 @@ ${message}`;
             `© ${new Date().getFullYear()} Painstaking Web Development. All rights reserved.`;
 
     }
+
+
+    /* =====================================================
+       LOGO FALLBACK
+    ===================================================== */
+
+    document.querySelectorAll(".logo img").forEach(logo => {
+
+        logo.addEventListener("error", () => {
+
+            logo.style.display = "none";
+
+        });
+
+    });
 
 });
