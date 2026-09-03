@@ -112,7 +112,7 @@ img {
 }
 
 .logo img {
-    width: 95px;
+    width: 105px;
     height: auto;
     max-height: 42px;
     object-fit: contain;
@@ -284,7 +284,7 @@ img {
 }
 
 .hero p {
-    max-width: 620px;
+    max-width: 290px;
 
     color: var(--muted);
     font-size: 1.08rem;
